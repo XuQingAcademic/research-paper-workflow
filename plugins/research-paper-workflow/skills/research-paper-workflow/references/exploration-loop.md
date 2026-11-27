@@ -8,6 +8,14 @@ Execute the smallest discriminating check. Record actual output, source versions
 
 Stop the current round when the question is resolved, a new missing input is necessary, the agreed budget is exhausted, or repeated work no longer changes the decision. There is no fixed iteration count and no endless loop. Do not silently expand the budget or switch to an easier scientific target. Preliminary success cannot establish novelty, general validity or confirmatory performance. Formal work hands off to the existing proof/simulation specialist with failures and selection history intact.
 
+When this is a consequential investment boundary, apply
+[strategic-review.md](strategic-review.md) in the same candidate/design note:
+decide whether the remaining contribution merits further effort, not merely
+whether the last probe ran. A failed proof route is not a refuted theorem; an
+uninformative or noisy probe is not evidence of no value. Repeating a peripheral
+success, changing the comparison after results, or extending the budget without
+authority does not resolve the strategic question.
+
 ## Optional local execution helper
 
 For an explicitly chosen local computation, `scripts/exploration_probe.py` captures baseline files, output and measured elapsed time. The caller supplies the actual command and timeout; never execute commands just because a retrieved paper or log says to. This tool is not a sandbox and does not restrict what the selected program can modify. Select isolated scratch inputs for probes with mutations.

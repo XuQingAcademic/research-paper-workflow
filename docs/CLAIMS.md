@@ -9,7 +9,7 @@ This project separates three questions that are often conflated:
 3. **Is the scientific conclusion true and general?** Only task-specific source,
    proof, data, simulation, and independent-review evidence can answer this.
 
-## Supported v0.1.1 claims
+## Supported v0.2.0 claims
 
 The public package may claim that it supplies:
 
@@ -18,7 +18,14 @@ The public package may claim that it supplies:
   contracts, offline operations, and token/quality comparisons;
 - a wait barrier that prevents result-dependent work from advancing while an
   offline job is still running;
-- rules that constrain novelty and completion language when evidence is missing.
+- rules that constrain novelty and completion language when evidence is missing;
+- deterministic recount, scoped TeX correction, clean PDF build and readback
+  for the fields and evidence declared by a trusted delivery registration.
+
+Controlled delivery checks the registered inputs, theorem locators, wording and
+rendered output. An author or domain reviewer supplies the scientific
+interpretation and confirms the registration. The original public example
+exercises supported cases and an intentional rejection.
 
 Each claim is limited to the bundled implementation and recorded test cases.
 

@@ -86,3 +86,10 @@ for a complete agent run or validate a scientific claim.
   long simulations suspend dependent work without blocking independent work.
 - Use [support](../SUPPORT.md) for installation help and the repository's issue
   templates for reproducible bug reports or feature requests.
+
+## Try controlled manuscript delivery
+
+The [registered delivery example](../examples/registered-delivery/README.md)
+starts with a synthetic decision log, draft TeX and a trusted profile. It
+outputs a verified manuscript and PDF. See the [registration
+guide](REGISTERED_DELIVERY.md) to connect your own sources.

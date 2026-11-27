@@ -31,3 +31,25 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Run repository checks
         run: python3 scripts/run_checks.py
+
+  registered-delivery:
+    name: Registered LaTeX delivery
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Install TeX and PDF tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends latexmk texlive-latex-base texlive-latex-recommended ghostscript
+      - name: Run the registered delivery demo
+        run: python3 -B examples/registered-delivery/check_demo.py
+      - name: Run bundled specialist tests
+        run: |
+          python3 -m pip install PyYAML
+          (cd plugins/research-paper-workflow/skills/audit-numerical-simulations-v2 && python3 -B -m unittest discover -s tests)
+          (cd plugins/research-paper-workflow/skills/write-econometrics-paper-v3 && python3 -B -m unittest discover -s tests)

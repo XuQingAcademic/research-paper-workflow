@@ -1,6 +1,6 @@
 # Compatibility matrix
 
-Last local and hosted-CI verification: 2026-09-29.
+Historical hosted-CI and installation results below are from the v0.1.x series. The v0.2.0 delivery demo was verified locally on 2026-11-27.
 
 | Surface | Version or environment | Evidence | Status |
 | --- | --- | --- | --- |
@@ -15,7 +15,8 @@ Last local and hosted-CI verification: 2026-09-29.
 | skills.sh CLI | 1.7.0 | Discovered the nested skill without `--full-depth`; installed the public GitHub source into an isolated project with scripts and references present | Passed; public directory indexing remains pending |
 | ChatGPT desktop local marketplace | Current supported client | Repo marketplace prepared | Pending installation test |
 | Universal Plugins Directory | Public submission | Portable ZIP prepared | Not submitted |
-| Windows | Any | POSIX file locks are used by state controllers | Unsupported in v0.1.1 |
+| Registered delivery example | v0.2.0 preview | Python 3.9 on macOS with latexmk, pdfLaTeX and Ghostscript | Passed locally, including PDF rebuild and rejection exercise |
+| Windows | Any | POSIX file locks are used by state controllers | Unsupported in this preview |
 
 “Passed” is limited to the listed test suite. It does not establish scientific
 validity, a clean second-host install, or compatibility with future client

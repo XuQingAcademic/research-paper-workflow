@@ -9,35 +9,55 @@ the end of the first phase; decisive evidence is bound by the end of the second;
 the last phase permits only targeted repairs and direct output checks. Do not
 start broad optional audits during finalization.
 
-## Framing, candidate ideas, and feasibility
+## Problem, known solution, and candidate development
 
-Use `mine-econometrics-ideas` as the specialist for this stage. Start from the actual research problem and a substantive insight; a weaker assumption or method combination is useful when it solves that problem, not as a default novelty recipe. Reuse the selected candidate, source versions, prior rejected variants and completed probes. An idea-only request ends at its proposal scope; an end-to-end request carries the same candidate IDs into design and downstream work.
+Use `mine-econometrics-ideas` for scientific discovery and comparison. It owns
+the detailed work; this workflow consumes its existing record (default
+`research/idea-mining.md`; preserve existing names), candidate IDs, source
+versions, derivations, probes and decisions. An idea-only request ends at its
+proposal scope; an end-to-end request carries those same objects into design.
 
-For each candidate record in the existing idea record (default `research/idea-mining.md`; preserve an existing `research/ideas.md`):
+Recover the original question, information available, target guarantee and why
+the unresolved result would matter. Before treating a candidate as worth a full
+paper investment, consume the specialist's actual attempt to solve this same
+problem with the strongest known results, including applicable combinations.
+Read the cited theorem/equation/code locators and the achieved scope,
+not merely the comparison table's conclusion. This identifies the specific
+obstacle left by existing knowledge and prevents an omitted standard solution
+from becoming the proposed contribution.
 
-- precise question, population/index, estimand or null, and a falsifiable claim;
-- closest known alternatives with source identifiers and unresolved comparisons;
-- proposed difference and why it matters scientifically or economically;
-- minimum theorem, counterexample, diagnostic, or data check that could kill it;
-- available data and lawful access, proof tools, code, compute, time and skills;
-- failure modes, salvageable narrower variant, and decision with reasons.
+Develop mechanisms from those obstacles, using the idea specialist's discovery
+loop. When independent agents help, give each the problem and source evidence,
+not a favored mechanism or requested verdict. Alternatives may challenge the
+same obstacle through different constructions, information use or proof ideas.
+Compare their actual increments and costs. Source comparison continues during
+this work whenever a new route changes the relevant neighbors or equivalences.
+Do not wait for a chosen idea before doing decisive literature work.
 
-When several agents explore ideas, let them first generate independently, then
-compare and search; sharing a favored answer upfront creates correlated ideas.
-Separate observation, question, mechanism, hypothesis, estimand, prediction and
-evidence. Include credible rival explanations and a prediction matrix showing
-which observation would distinguish them, refute the idea, or remain inconclusive.
+Consume an actual probe of the central bridge: a derivation, witness,
+counterexample, small diagnostic or other scope-appropriate evidence. Record
+what it establishes and what remains unknown. Full theorem closure is not a
+prerequisite for bounded discovery. If a route is covered, inspect the reduction
+for a useful unresolved boundary; a failure is information for further discovery,
+not a requirement to manufacture a salvaged candidate.
 
-Do not select an idea just because a generated title sounds novel. Test the
-cheapest important failure first. A good negative result or boundary theorem can
-be a legitimate contribution if it answers the question. Preserve the original
-claim when proposing a repaired one. Honor a selected idea unless evidence
-requires revisiting it; explain the evidence and alternatives concretely.
+The research brief links the known solution, remaining obstacle, actual new
+mechanism, probe and assessment of the remaining contribution's value. Reuse an
+independent assessment when it is required or already available; bounded
+discovery does not require a new review panel. A theory result can matter by resolving a consequential uncertainty,
+separating regimes, exposing a sharp limit or changing what can be identified or
+proved; it need not invent an application or real-model experiment. Explain why
+the particular increment has that value. Correctness, unfamiliar notation and
+proof length are not evidence of importance.
 
-Deliver a one-page research brief and a chosen working idea. Author choices can
-remain explicitly provisional while literature and feasibility checks proceed.
+Deliver the brief with the justified next commitment: further bounded discovery,
+development of a supported candidate, or a reason no current route merits that
+investment. No chosen working idea is mandatory. Preserve the first investment
+judgment, support and open conditions in the existing record; later revisions
+retain the original target and explain what changed. A narrower claim receives
+its own value judgment rather than inheriting the original recommendation.
 
-## Literature and novelty
+## Source evidence throughout discovery
 
 Use `paper-lookup` for reproducible discovery and citation chaining, and
 `citation-management` for deduplication/metadata. `deepread` reconstructs a source
@@ -59,26 +79,41 @@ justify omitting a closer record whose supplied abstract, metadata or locators
 already establish a more direct overlap. Record why each plausible candidate was
 selected, distinguished, or left unresolved.
 
-Build `research/nearest-neighbors.md` with each work's question, estimand/null,
-assumptions, result, feasible algorithm, data/simulation scope, exact locator,
-and difference from the proposed paper. An unresolved close neighbor prevents
-strong novelty language. Negative search never proves global absence. Reuse the
-paper-v3 novelty contract rather than inventing a numeric novelty score.
-
-Check whether statistics reduce to the same object after scaling, transformation
-or equivalent calibration. Separate a new proof, wider assumptions, a better rate
-and a new feasible method; explain the resulting capability and practical problem.
-Use the writer's detailed comparison guidance rather than duplicating its table.
+Reuse the idea specialist's source comparison and construction records; create
+`research/nearest-neighbors.md` only if no equivalent record exists. Preserve
+the aligned question, information, assumptions, guarantees and costs, exact
+source versions and locators, and what the reconstructed solution actually
+delivers. The idea specialist owns implication, equivalence and composition
+checks. Missing decisive source evidence calls for a targeted retrieval or a
+bounded unresolved comparison; negative search never proves global absence.
+Use the writer's novelty contract when turning these results into paper prose,
+without creating another comparison table or numeric novelty score.
 
 Deliver verified bibliography, source map, nearest-neighbor comparison, and a
 literature synthesis that leads to the actual research question.
 
 ## Design freeze
 
+Consume the discovery comparison, actual central probe and contribution
+assessment before a substantial commitment. Use
+[strategic-review.md](strategic-review.md) in these same notes to decide the
+investment, reusing an applicable independent assessment rather than adding a
+panel. Freeze the author objective separately from the provisional route and
+state the evidence that would change the next phase's decision. Revisit when
+material evidence changes the case or that phase is uninformative; do not defer
+the first serious comparison until after design freeze.
+
 Write `research/design.md`: paper spine (question, friction, move, guarantee,
 value), intended claims, nonclaims, assumptions, proof obligations, data sample
 construction, inference, benchmarks, planned exhibits, and decision criteria.
 Bind each intended claim to the evidence that would establish or reject it.
+
+Before expanding the outline, use the writer's contribution-hierarchy check in
+`references/reader-facing-writing.md`: recover primary/secondary results,
+inherited versus new work, nearest-neighbor differences, and the general
+framework versus verified implementation examples. Reuse current author choices;
+record unresolved scientific comparisons without inventing a contribution. Keep
+this in the existing design/spine notes, not a second contribution registry.
 
 For empirical work freeze a pre-analysis specification before outcome-driven
 choices; exploratory analyses remain possible but must be labeled and versioned.
@@ -112,13 +147,6 @@ ledger, source locators, known boundaries, review findings, and the immutable
 proof-to-simulation/writing handoff. A result can enter prose only at the
 specialist's verified scope. A gap can remain visible in a draft but cannot be
 recorded as a ready theory stage.
-
-When the project uses the public proof-lineage interface, have the proof provider
-export the smallest active-root projection described in
-[proof-lineage.md](proof-lineage.md), then run `scripts/proof_lineage.py` against
-the project. Its graph, status, and hash checks are orchestration gates only;
-they do not substitute for the provider's ledger, proof audit, or independent
-scientific review.
 
 ## Empirical branch
 
@@ -165,6 +193,14 @@ exhibits, terminology and author decisions. Draft setup/literature while results
 develop. Then write supported methods/results, complete appendices, limitations,
 and interpretation; rebuild abstract/introduction/title/conclusion last.
 
+For the first complete draft, use the writer's
+`references/first-draft-review.md` when preparing the outline, accepting
+specialist handoffs and reviewing the assembled manuscript. Apply the same
+checks to the affected content after a substantive manuscript revision.
+Recover accepted feedback from the current project and its author locks.
+Use the existing verification and review stages for the resulting checks.
+Some scientific work may remain deferred within the author's chosen scope.
+
 An explicitly requested de-AI prose pass uses the installed `humanizer` through
 the writer's academic profile after claim-bearing content is stable. It removes
 formulaic staging and cadence while retaining formal register, fixed terminology,
@@ -176,6 +212,12 @@ standard plotting tools and retained source data. Image generation is suitable
 for a conceptual illustration only if requested/useful, never for inventing a
 scientific plot or experimental evidence. Use document/slides/spreadsheet skills
 for those actual output formats; do not convert a LaTeX project unnecessarily.
+
+Before interpreting exhibits, use the writer's Monte Carlo and figure guidance
+in `references/econometrics-writing-playbook.md`. Select the main patterns and
+the evidence changing their interpretation; do not narrate every cell or label
+an uncalibrated rejection difference a power advantage. Carry plot transformations
+and their interpretation ceiling into the caption and surrounding prose.
 
 For deferred simulations, mark all pending result cells and sentences in the
 working state. Use an explicit pending section in the internal manuscript and a
@@ -189,6 +231,10 @@ Run appropriate specialist validators and retain their outputs alongside actual
 scientific evidence. Build the manuscript with the existing toolchain; inspect
 the PDF where visual layout matters. Check cross-file references, citations,
 numerals, appendix coverage, figure paths, and table-to-code provenance.
+For a first draft, bind the result of the applicable checks to the draft and
+the artifacts actually delivered. An internal partial draft may be delivered
+with precise remaining work. Author review of a complete scoped draft does
+not require a submission package or submission approval.
 
 Independent reviewers inspect the frozen claim and current artifacts without
 the worker's desired verdict. Use a generic fresh reviewer when named review

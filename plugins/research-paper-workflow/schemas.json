@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_series": "0.1.x",
+  "release_series": "0.2.x",
   "policy": "preview-no-silent-mutation",
   "schemas": [
     {
@@ -316,6 +316,15 @@
       "role": "derived-report",
       "lifecycle": "current",
       "compatibility": "generated",
+      "superseded_by": null
+    },
+    {
+      "identifier": "research-prompt-trial.v1",
+      "owner": "skills/research-paper-workflow/scripts/prompt_trials.py",
+      "marker": "research-prompt-trial.v1",
+      "role": "input-contract",
+      "lifecycle": "current",
+      "compatibility": "exact-version",
       "superseded_by": null
     }
   ],

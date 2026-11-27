@@ -1,0 +1,63 @@
+{
+  "schema_version": "research-release-contract.v1",
+  "objects": [
+    {
+      "object_id": "replace-object-id",
+      "object_type": "theorem",
+      "version": "v1",
+      "content_hash": "replace-content-hash",
+      "scope_hash": "replace-scope-hash"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "replace-claim-id",
+      "object_id": "replace-object-id",
+      "required": true,
+      "dependencies": [],
+      "applicable_certificates": [
+        "source_identity_version",
+        "proof_truth",
+        "proof_scope_coverage",
+        "manuscript_wording_eligibility"
+      ],
+      "state": {
+        "source_identity_version": "PARTIAL",
+        "proof_truth": "PARTIAL",
+        "proof_scope_coverage": "PARTIAL",
+        "implementation_reproducibility": "NOT_APPLICABLE",
+        "simulation_inference_eligibility": "NOT_APPLICABLE",
+        "citation_novelty_coverage": "NOT_APPLICABLE",
+        "artifact_lineage_freshness": "NOT_APPLICABLE",
+        "manuscript_wording_eligibility": "PARTIAL"
+      }
+    }
+  ],
+  "root_errors": [],
+  "coverage_blockers": [
+    {
+      "blocker_id": "replace-unverified-obligation",
+      "claim_id": "replace-claim-id"
+    }
+  ],
+  "artifacts": [
+    {
+      "artifact_id": "replace-artifact-id",
+      "claim_ids": [
+        "replace-claim-id"
+      ],
+      "freshness": "current"
+    }
+  ],
+  "release_vector": {
+    "schema_GO": true,
+    "source_GO": false,
+    "proof_GO": false,
+    "implementation_GO": true,
+    "simulation_GO": false,
+    "writing_GO": false,
+    "artifact_GO": true,
+    "scientific_GO": false,
+    "submission_GO": false
+  }
+}

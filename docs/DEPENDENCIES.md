@@ -22,12 +22,19 @@ inventory is
 
 ## Relationship types
 
-- **First-party companion:** maintained alongside this workflow but distributed
-  separately in v0.1.1.
+- **First-party companion:** maintained alongside this workflow. The plugin
+  bundles simulation audit and manuscript writing. Idea discovery and proof
+  remain capability integrations supplied by an installed provider.
 - **Third-party integration:** an independently maintained skill that may be
   invoked when installed; its code is not bundled.
 - **Design influence:** a public project whose mechanism informed a local,
   independent implementation; it is not a runtime dependency.
+
+The simulation manifest reader accepts JSON directly. YAML inputs and the
+simulation companion unit tests require [PyYAML](https://pyyaml.org/).
+The registered delivery example uses Python and the TeX/PDF tools in the
+[delivery guide](REGISTERED_DELIVERY.md). Prompt comparison is opt-in and
+requires a compatible separately installed comparison provider.
 
 The exact third-party sources and licenses are listed in
 [`THIRD_PARTY.md`](../THIRD_PARTY.md).

@@ -6,6 +6,54 @@ a causal assumption is true. Use the existing project language/environment.
 Choose a verified implementation for the exact design and consult its current
 official method documentation before relying on unfamiliar behavior.
 
+## Empirical-first entry gate
+
+When the author asks to start from a real empirical problem or requires a real
+application, apply this gate **before the first recommendation** and again
+**before selecting or resuming substantial work on that candidate**. Keep the
+following linked evidence together in the existing candidate or design note.
+
+1. **Actual decision and mechanism.** Cite primary evidence of the concrete
+   empirical question, the population and the consequential decision or finding.
+   Map every load-bearing observation restriction to the actual process that
+   generated the data. Distinguish a documented policy, how it was implemented
+   in the relevant sample, and a researcher's proposed alternative design.
+2. **Usable real observations.** Actually inspect a permitted real sample or
+   an authorized query output at the granularity required by the question.
+   Record the source and version, access, units and coverage, fields or joins,
+   outcome timing and the observed variation, selection or missingness relevant
+   to the target. Confirm which claim this information can support. A download
+   listing, codebook or promised access alone is insufficient.
+3. **Baseline and consequential residual obstacle.** Execute a bounded,
+   exploratory check using the strongest applicable existing approach on
+   those data. If it cannot be applied, verify the exact incompatibility or
+   information limit against the inspected data and actual mechanism, and
+   execute the closest feasible empirical diagnostic. Record the result,
+   remaining obstacle and how it affects a meaningful decision, conclusion
+   or precision target. A method idea requires a material residual obstacle
+   beyond the applicable standard solution.
+
+If any item is missing or invalid, mark the empirical route as pending or
+incompatible and name the decisive missing evidence and what would reopen it.
+Do not recommend it as empirical-first or advance that route to design freeze,
+substantial proof, production simulation or manuscript expansion. Bounded
+discovery may continue and may end with zero recommendations. Replays on
+real outcomes under invented assignment, selection, masking or aggregation
+are design exercises and cannot establish that the assumed mechanism occurred.
+Proofs, positive reviews and draft completion cannot substitute for this gate.
+A design that changes the population, target or observation process must be
+checked on its own terms. A separate pure-theory or prospective-design route
+requires author-directed scope and an explicit evidence boundary.
+
+On resume, reuse evidence only while the actual design, data access, fields
+and target still match. Reopen any unsupported prior promotion at the affected
+stage and retain the earlier work as scoped evidence. Where a workflow receipt
+exists, bind the three evidence items in the existing `ideas.feasibility`
+check. Use `partial` for unverified evidence or `fail` for a demonstrated
+mismatch and keep the affected stage below `ready`. Do not add a second ledger.
+This gate governs eligibility for the empirical route; it does not certify
+identification, novelty or journal-level contribution.
+
 ## Feasibility before commitment
 
 Identify dataset, access rights, unit, geography, period, sampling frame, treatment
@@ -53,6 +101,29 @@ thresholds in this workflow. Justify diagnostics and inference using the actual
 method, sample and assumptions; invoke theory-v2 for nonstandard justification.
 Do not turn a diagnostic passing into proof of identification.
 
+For time-indexed or overlapping outcomes, reconcile the paper's definition with
+the executable sample construction before a full run: observed information at
+the decision date, lead/lag endpoints, aggregation/units, data vintage and sample
+exclusions. Write out a small dated example or a known-answer fixture when the
+endpoints can be confused. A window beginning at t is not the same outcome as
+one beginning at t+1, even if both contain the same number of periods.
+
+Then check inference on the actual score/residual process and dependence induced
+by that construction, not merely the raw data's label. HAC, clustered covariance
+or block bootstrap names do not supply an applicability proof. Resolve the exact
+method/source version, required assumptions, covariance/estimation effects and
+calibration in the existing method handoff, and verify representative implementation
+checks before consuming p-values or intervals. Do not fabricate independence,
+mixing or a martingale-difference property from overlapping observations.
+
+An author may decline a new theory section without declining internal validation.
+Use an already applicable result when its interface is verified; otherwise keep
+the affected inference pending, complete valid descriptive/implementation work,
+and identify the missing justification or substantive method choice. Do not
+silently invent an extension, declare an untested correction successful, or use
+"future theory" to justify current significance. Distinguish comparison of
+external methods from an ablation of the paper's own calibration components.
+
 Potential Python implementation sources, subject to exact-task verification:
 [statsmodels](https://www.statsmodels.org/stable/index.html),
 [linearmodels](https://bashtage.github.io/linearmodels/), and
@@ -72,6 +143,12 @@ Run the actual analysis and planned diagnostics. Export machine-readable result
 records and build tables/plots from them. Retain code/config/environment identity,
 sample counts, estimate, uncertainty, units, and admissible interpretation.
 Validate substantive size and uncertainty, not just stars or p-values.
+
+Before making plots or claims from these records, pass their exact target,
+transformations and admissible interpretation to the writer's figure guidance
+in `references/econometrics-writing-playbook.md`. Reproducible drawing alone does
+not establish that a bright region, squared process or normalized intensity is
+a signed effect or a significant local result.
 
 ## Bind an executable adapter and result
 

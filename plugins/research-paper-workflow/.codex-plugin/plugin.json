@@ -1,6 +1,6 @@
 {
   "name": "research-paper-workflow",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Evidence-grounded orchestration for quantitative research papers, from idea discovery through reproducible delivery.",
   "author": {
     "name": "XuQing",
@@ -30,7 +30,8 @@
       "Evidence handoffs",
       "Resumable state",
       "Non-regression review",
-      "Offline job coordination"
+      "Offline job coordination",
+      "Registered manuscript delivery"
     ],
     "defaultPrompt": [
       "Use $research-paper-workflow to resume this paper from its current artifacts.",

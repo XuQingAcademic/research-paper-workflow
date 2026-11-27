@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "workflow_version": "0.1.1",
+  "workflow_version": "0.2.0",
   "resolution_policy": {
     "discover_at_runtime": true,
     "never_assume_installed": true,
@@ -23,13 +23,13 @@
     {
       "name": "audit-numerical-simulations-v2",
       "capability": "Monte Carlo design, implementation, lineage, precision, and release auditing",
-      "bundled": false,
+      "bundled": true,
       "required_for": "specialist simulation-release claims"
     },
     {
       "name": "write-econometrics-paper-v3",
       "capability": "evidence-ceiling manuscript drafting, revision, and release auditing",
-      "bundled": false,
+      "bundled": true,
       "required_for": "specialist manuscript-release claims"
     }
   ],

@@ -1,0 +1,43 @@
+{
+  "build": {
+    "cwd": "paper",
+    "entry": "main.tex",
+    "pdf": "main.pdf",
+    "argv": ["latexmk", "-pdf", "-interaction=nonstopmode", "-halt-on-error", "main.tex"]
+  },
+  "location": {
+    "file": "paper/main.tex",
+    "anchor": "\\section{Conclusion}",
+    "position": "before"
+  },
+  "experiments": [
+    {
+      "basis": "replay",
+      "file": "replay/synthetic_trials.csv",
+      "source": "replay/synthetic_trials.csv, the synthetic independent replay",
+      "groups": [],
+      "unit": "trial",
+      "approve": {
+        "column": "decision",
+        "yes": "issued",
+        "no": ["withheld"]
+      },
+      "risk": {"column": "population_risk"},
+      "limit": {"constant": "0.20"},
+      "risk_label": "population risk",
+      "threshold_label": "the risk budget of 0.20",
+      "unit_label": "teaching repetitions"
+    }
+  ],
+  "scope": [
+    {
+      "file": "paper/main.tex",
+      "anchors": ["\\label{thm:teaching-release}"],
+      "controls": "population-risk",
+      "name": "Theorem 1",
+      "guarantee": "The probability over calibration of release with population risk above the budget is at most the specified failure allowance.",
+      "assumptions": "The rule, budget and failure allowance are fixed before calibration. The calibration losses are independent Bernoulli draws with the rule's population risk as their mean. Release requires zero calibration losses and enough observations for the zero-loss probability at the budget to meet the failure allowance.",
+      "relation": "A strict exceedance can occur on an individual release. The synthetic teaching counts illustrate the event and denominator."
+    }
+  ]
+}

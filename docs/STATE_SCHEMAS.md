@@ -11,6 +11,11 @@ This registry is an index and lifecycle contract. The controller validators are
 the executable structural specifications; the registry does not pretend that a
 schema name alone establishes scientific validity.
 
+Public v0.1.1 records remain readable in this update. Revision state carrying a
+new strategic hold history should continue with v0.2.x; v0.1.1 did not recognize
+that optional field. For a rollback, retain the current state and use a prior
+compatible snapshot with the older plugin.
+
 ## Format classes
 
 | Role | Meaning | Compatibility expectation |
@@ -26,11 +31,11 @@ not a claim that every future preview release will accept the format.
 
 ## Preview compatibility policy
 
-The v0.1.x series follows `preview-no-silent-mutation`:
+The v0.2.x series follows `preview-no-silent-mutation`:
 
 1. A named identifier such as `paper-revision-contract.v2` is not silently
    reused for a different record shape or meaning.
-2. Patch releases in the same `0.1.x` series retain current input and persistent
+2. Patch releases in the same preview series retain current input and persistent
    readers. A security or integrity repair may reject data that was malformed,
    unsafe, or outside the documented contract.
 3. A breaking format change requires a new identifier, a registry entry, a
@@ -46,7 +51,7 @@ The v0.1.x series follows `preview-no-silent-mutation`:
 
 ## Current coexistence and migration rules
 
-There is no generic in-place migrator in v0.1.1. That is deliberate: research
+There is no generic in-place migrator in this preview. That is deliberate: research
 records may contain judgments that cannot be safely inferred by a mechanical
 conversion.
 

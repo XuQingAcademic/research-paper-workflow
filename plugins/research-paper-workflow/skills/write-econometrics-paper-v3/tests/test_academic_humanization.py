@@ -18,6 +18,17 @@ class AcademicHumanizationTests(unittest.TestCase):
         after = r"Table~\ref{tab:main} reports $T_n=1.25$ \citep{Smith2025}."
         self.assertTrue(MODULE.inspect(before, after)["valid"])
 
+    def test_inline_math_preserves_escaped_dollars_and_commands(self) -> None:
+        before = r"Profit is $p=\$20+\alpha$, with \(q=\beta\)."
+        after = r"With \(q=\beta\), profit is $p=\$20+\alpha$."
+        self.assertTrue(MODULE.inspect(before, after)["valid"])
+
+        change = MODULE.inspect(before, after.replace(r"\alpha", r"\gamma"))
+        self.assertEqual(change["protected_token_changes"]["inline_math"], {
+            "missing": [r"$p=\$20+\alpha$"],
+            "added": [r"$p=\$20+\gamma$"],
+        })
+
     def test_rejects_number_citation_or_colloquial_change(self) -> None:
         before = r"The estimate is 1.25 \citep{Smith2025}."
         after = r"Here's the thing: the estimate is 1.30 \citep{Jones2026}."

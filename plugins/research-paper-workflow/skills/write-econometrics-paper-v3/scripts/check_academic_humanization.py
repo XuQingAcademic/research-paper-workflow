@@ -15,7 +15,9 @@ PATTERNS = {
     "citations": re.compile(r"\\cite[a-zA-Z*]*\s*(?:\[[^]]*\]\s*)*\{[^}]+\}"),
     "labels": re.compile(r"\\label\{[^}]+\}"),
     "references": re.compile(r"\\(?:eqref|ref|autoref|cref|Cref)\{[^}]+\}"),
-    "inline_math": re.compile(r"(?<!\\)\$(?:\\.|[^$])*?(?<!\\)\$|\\\((?:.|\n)*?\\\)"),
+    "inline_math": re.compile(
+        r"(?<!\\)\$(?:\\\$|[^\\$]|\\(?!\$))*?(?<!\\)\$|\\\((?:.|\n)*?\\\)"
+    ),
     "display_math": re.compile(r"\\\[(?:.|\n)*?\\\]"),
     "numbers": re.compile(r"(?<![A-Za-z])[-+]?\d+(?:[.,]\d+)*(?:e[-+]?\d+)?%?", re.IGNORECASE),
 }

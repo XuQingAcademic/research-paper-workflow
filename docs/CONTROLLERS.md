@@ -26,6 +26,8 @@ also follow the [CLI exit-code contract](EXIT_CODES.md): exit `1` commonly means
 | `proof_lineage.py` | project and lineage record | Checks a proof-lineage projection, closure, statuses, and hashes; success does not establish theorem truth or reviewer independence. |
 | `token_evaluation.py` | project and paired evaluation record | Reports savings only when comparable usage falls and every protected check passes. |
 | `check_companions.py` | optional skill roots, text or JSON | Discovers known provider names; availability is not scientific validation. |
+| `deliver_manuscript.py` | Draft, registered evidence and fresh output directory | Recomputes evidence, applies scoped edits, builds and verifies the PDF. See the [registration guide](REGISTERED_DELIVERY.md). |
+| `prompt_trials.py` | `decide`, `select` with a separately installed compatible evaluation manager | Reads existing comparisons and evaluates scoped adoption eligibility. |
 | `content_bindings.py` | Python library | Shared safe-path, regular-file, fragment, and hash validation. |
 
 ## Path convention

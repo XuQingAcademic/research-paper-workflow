@@ -1,0 +1,179 @@
+schema_version: "2.0"
+
+study:
+  title: "Replace with the simulation study title"
+  design_version: "v1"
+  stage: "design"  # design | pilot | formal
+  theory_artifact: "paper section / theorem / equation"
+  code_version: ""
+  object_registry_version: "v1"
+  error_registry_version: "v1"
+
+scientific_objects:
+  - object_id: "replace-theorem-object-id"
+    object_type: "theorem"
+    content_version: "v1"
+    content_hash: ""
+    scope_hash: ""
+    null_id: ""
+    index_scope: "pointwise"  # pointwise | exact_grid | continuum
+    norm: ""
+
+proof_obligations:
+  - obligation_id: "O1"
+    theorem_object_id: "replace-theorem-object-id"
+    status: "unverified"  # verified | unverified | contradicted | not_applicable
+    risk_axis: "boundary_or_blind_direction"
+    required_scenario_ids: ["null_baseline"]
+    allowed_evidence_role: "stress_test"
+
+aims:
+  - id: "A1"
+    claim: "The proposed test controls size at the nominal level under the baseline null."
+    target: "null rejection probability"
+    decision_rule: "Pre-specify a material band or interval rule using MCSE."
+
+estimands:
+  - id: "E1"
+    definition: "Rejection probability at nominal alpha under each DGP."
+    truth_source: "Known from DGP classification."
+    null_id: ""
+    population: ""
+    conditioning: ""
+
+dgp:
+  scenarios:
+    - id: "null_baseline"
+      purpose: "Validate size under maintained assumptions."
+      classification: "null"
+      sample_sizes: [500, 1000]
+      factors: {}
+      assumptions_targeted: ["baseline maintained assumptions"]
+      expected_failure_signal: "Systematic rejection above the pre-specified size gate."
+      truth_by_method:
+        proposed: "null"
+        benchmark: "diagnostic_only"
+    - id: "alternative_baseline"
+      purpose: "Measure power under the primary fixed alternative."
+      classification: "fixed_alternative"
+      sample_sizes: [500, 1000]
+      factors: {}
+      assumptions_targeted: ["primary signal direction"]
+      expected_failure_signal: "Power does not improve with signal or sample size."
+
+methods:
+  - id: "proposed"
+    role: "proposed"
+    implementation: "function/module and version"
+    tuning_rule: "pre-specified"
+    failure_rule: "record failure; do not silently substitute another method"
+    method_object_id: ""
+    tested_null_id: ""
+    evidence_role: "confirmatory"
+    solver_policy_version: "v1"
+  - id: "benchmark"
+    role: "benchmark"
+    implementation: "function/module and version"
+    tuning_rule: "fair pre-specified rule"
+    failure_rule: "record failure"
+  - id: "oracle"
+    role: "oracle"
+    implementation: "infeasible reference using known DGP truth"
+    tuning_rule: "not applicable"
+    failure_rule: "record failure"
+
+inference:
+  nominal_levels: [0.05]
+  variance_or_standardization: "state exact formula"
+  resampling:
+    kind: "multiplier_bootstrap"
+    draws: 999
+    p_value_rule: "plus_one"
+    resampling_unit: "observation"
+  adaptive_selection:
+    enabled: false
+    data_relation: "not_applicable"  # sample_split | cross_fit | same_sample | not_applicable
+    validity_basis: ""
+    selection_stream: "bootstrap_selection"
+    calibration_stream: "bootstrap_calibration"
+
+performance:
+  measures:
+    - id: "size"
+      definition: "mean(reject) in null scenarios"
+      event_scope: "method_specific_null"
+      primary: true
+    - id: "power"
+      definition: "mean(reject) in alternative scenarios after size gate"
+      comparison_contract: "same_null_and_size_calibrated"
+      primary: true
+    - id: "failure_rate"
+      definition: "failed attempts / planned replications"
+      primary: true
+  target_mcse:
+    proportion: 0.005
+  expected_proportion_for_precision: 0.05
+
+replications:
+  planned: 2000
+  actual_valid: null
+  completed_id_source: "validated terminal ledger"
+  stopping_rule: "fixed R chosen before formal results; extend only by a versioned rule"
+
+randomness:
+  generator: "state RNG and version"
+  rng_schema_version: "v1"
+  master_seed: 20260720
+  key_fields: ["design_version", "config_fingerprint", "rng_schema_version", "stage", "scenario_id", "sample_size", "replication_id", "fold_id", "resample_id", "stream_role", "draw_id"]
+  stream_roles: ["dgp", "method_tuning", "bootstrap_selection", "bootstrap_calibration"]
+  paired_fields: ["scenario_id", "sample_size", "replication_id"]
+  independent_fields: ["replication_id", "stream_role"]
+  parallel_strategy: "derive streams from scientific identity, not worker order"
+
+execution:
+  precision: "float64"
+  workers: 1
+  checkpoint_by: ["scenario_id", "method_id", "replication_id"]
+  checkpoint_commit: "atomic_idempotent_terminal_payload"
+  checkpoint_required_fields: ["replication_id", "config_fingerprint", "rng_key", "status", "payload_checksum"]
+  resume_rule: "expected_ids minus unique valid terminal IDs"
+  fail_policy: "record_and_stop_unit"
+  retry_policy:
+    version: "v1"
+    trigger: "pre-specified solver status only"
+    max_attempts: 1
+    preserve_all_attempts: true
+    outcome_dependent: false
+  config_fingerprint: true
+  smoke_config: "path/to/smoke config"
+  formal_config: "path/to/formal config"
+
+outputs:
+  row_level:
+    path: "results/per_replication.csv"
+    unique_key: ["design_version", "scenario_id", "method_id", "replication_id"]
+    required_columns: ["design_version", "config_fingerprint", "scenario_id", "method_id", "replication_id", "seed_key", "attempt_id", "status", "failure_class", "reject", "p_value", "runtime", "payload_checksum"]
+  aggregation: "validate completeness and fingerprints before summarizing"
+  tables_and_figures: "generated only from validated row-level results"
+
+reporting:
+  report_mcse: true
+  report_failures: true
+  report_effective_denominators: true
+  disclose_theory_code_differences: true
+  release_code_config_and_row_results: true
+  claim_evidence_ceiling:
+    phase: "formal"
+    role: "confirmatory"
+    max_wording_tier: "dgp_specific"
+    require_actual_R_and_mcse: true
+    require_failure_rate: true
+    require_same_size_for_dominance: true
+
+release_tests:
+  clean: true
+  single_root_mutations: true
+  composite_expected_from_singles: true
+  partial_unknown_not_contradicted: true
+  false_clean_unverified_fields: true
+  false_red_spurious_dependency: true

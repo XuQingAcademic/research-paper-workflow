@@ -29,7 +29,12 @@ failed probes and rejected candidates instead of silently replacing them.
 Serial revision after the paper spine is frozen is unchanged: the continuous
 revision controller still works on one active issue. Portfolio parallelism is
 for pre-freeze idea and discriminating-experiment exploration, not simultaneous
-unrelated manuscript edits.
+unrelated manuscript edits. A frozen spine does not immunize the selected idea
+from contrary evidence. At a later consequential decision use
+[strategic-review.md](strategic-review.md), preserve the old selection and
+scientific history, and reopen only the affected comparisons. Keep the existing
+status schema and single-active revision discipline; a strategic objection is
+not permission to start several unrelated manuscript branches.
 
 ## Search frontier
 

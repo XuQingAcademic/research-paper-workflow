@@ -26,10 +26,29 @@ can support quantitative research across fields; its deepest documented routes,
 interfaces, and examples currently target econometrics, statistics, and
 quantitative economics.
 
-> **Status: v0.1.1 Research Preview.** The bundled controllers have local
+> **Status: v0.2.0 Research Preview.** The bundled controllers have local
 > regression coverage, but this release is not a guarantee of novelty,
 > mathematical correctness, identification, publication, or exhaustive
 > literature coverage. See [claim boundaries](docs/CLAIMS.md).
+
+## Try the new manuscript delivery
+
+The workflow now includes a controlled LaTeX delivery path for registered
+risk-result projects. It recounts strict threshold exceedances among actual
+releases, tracks the denominator and its source, inserts the registered theorem
+scope, and rebuilds and checks the resulting PDF.
+
+[Run the original synthetic example](examples/registered-delivery/README.md)
+to inspect a verified PDF and its receipt. With the TeX tools installed, run
+this from a checkout:
+
+```bash
+python3 -B examples/registered-delivery/check_demo.py --output registered-demo-output
+```
+
+The check expects 2 strict false passes in 6 trials (4 actual releases). It also
+checks a repeated result, an independently rebuilt PDF, and an invalid theorem
+locator. [Configure controlled delivery for a project](docs/REGISTERED_DELIVERY.md).
 
 ## Who it is for—and what five minutes gives you
 
@@ -77,8 +96,8 @@ also available through [skills.sh](https://skills.sh/):
 npx skills add XuQingAcademic/research-paper-workflow --skill research-paper-workflow
 ```
 
-This route installs the workflow skill and its referenced files; the Codex
-plugin command above additionally installs the repository's plugin metadata.
+Use this single-skill route for orchestration. The controlled delivery CLI
+needs the three sibling skills supplied by the plugin or repository checkout.
 
 ## What the workflow actually does
 
@@ -166,8 +185,9 @@ Core mechanisms include:
 │   ├── controllers.json                   # CLI/library and exit-code inventory
 │   ├── schemas.json                       # state-format lifecycle inventory
 │   ├── dependencies/skills.json           # companion capability inventory
-│   └── skills/research-paper-workflow/    # skill, references, scripts, tests
-├── examples/minimal-paper/                # synthetic public example
+│   └── skills/                           # workflow, simulation audit, writing
+├── examples/minimal-paper/                # orchestration smoke example
+├── examples/registered-delivery/          # verified TeX delivery example
 ├── scripts/                               # repository validation
 └── docs/                                  # architecture and release contracts
 ```
@@ -227,7 +247,7 @@ reports the missing capability, and narrows its claims. See
 Inspect companion availability without changing the environment:
 
 ```bash
-python3 plugins/research-paper-workflow/scripts/check_companions.py
+python3 plugins/research-paper-workflow/scripts/check_companions.py --skill-root plugins/research-paper-workflow/skills
 ```
 
 The report deliberately labels scientific validation as “not assessed.” See
@@ -260,11 +280,11 @@ sidecar `.sha256` checksum for release verification. The archive itself contains
 The build self-verifies. A downloaded candidate can be checked portably with:
 
 ```bash
-python3 scripts/verify_release.py dist/research-paper-workflow-0.1.1.zip
+python3 scripts/verify_release.py dist/research-paper-workflow-0.2.0.zip
 ```
 
 GitHub Actions runs the same check on Linux and macOS across supported Python
-versions. Windows is not claimed in v0.1.1 because several controllers use
+versions. Windows is not claimed in v0.2.0 because several controllers use
 POSIX file locks; contributions that add an equivalent tested lock backend are
 welcome.
 
@@ -295,7 +315,7 @@ revisions, licenses, design influences, and whether code is bundled in
 - design influence: cite the source and the adopted mechanism;
 - copied or modified implementation: also preserve all required license notices.
 
-No third-party skill implementation is bundled in v0.1.1.
+No third-party skill implementation is bundled in v0.2.0.
 CI-only GitHub Actions are also attributed separately in
 `.github/actions-dependencies.json`; they are development infrastructure, not
 runtime research capabilities.

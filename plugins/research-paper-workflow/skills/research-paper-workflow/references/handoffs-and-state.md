@@ -9,9 +9,9 @@ Neither a filled checklist nor a zero exit code proves a scientific result.
 | Owner | Canonical information | Workflow consumes |
 | --- | --- | --- |
 | Existing project and author decisions | Active manuscript, scope, language, locks and authorized actions | Current objective and work boundaries |
-| Idea record plus optional portfolio sidecar | Candidate arguments, search evidence and decisions remain in the record; sidecar exposes IDs, frontiers, probes and reopen conditions | Selected candidate and bounded novelty status |
+| Idea record plus optional portfolio sidecar | Problem, known-solution derivations, source comparisons, probes and investment decisions remain in the record; sidecar exposes IDs, frontiers and reopen conditions | Evidence-supported next commitment; a selected candidate only when justified |
 | `write-econometrics-paper-v3` `.paper/` | Claims, citations, exhibits, revisions and journal overlay | IDs, exact evidence paths and permitted wording |
-| `prove-econometrics-theory-v2` | Statements, assumptions, obligations, proofs and independent checks | Version-bound proof handoff plus an optional hash-bound lineage projection |
+| `prove-econometrics-theory-v2` | Statements, assumptions, obligations, proofs and independent checks | Version-bound proof handoff |
 | `audit-numerical-simulations-v2` | Design, code/config, RNG, actual replication ledger and inference | Runnable preparation or actual validated results |
 | Empirical branch | Data lineage, design, analysis and actual outputs | Claim-to-estimand-to-result mapping |
 | Optional supervisor `.research-supervision/` | Its contract, three gates and exact candidate verdict | Scoped independent findings and verdict |
@@ -75,14 +75,6 @@ when crossing proof, simulation, source and writing boundaries. Do not replace
 the writer's claim ledger with workflow receipts. A release contract is the
 cross-skill view of the evidence, not a second editable source of its truth.
 
-For theory-bearing handoffs, use
-[proof-lineage.md](proof-lineage.md) and `scripts/proof_lineage.py` when the
-provider can export the public interface. The manifest records only IDs,
-versions, relationships, status, locators, hashes, and bounded release scope.
-It must not duplicate theorem or proof prose. A consumable lineage is required
-only when the project elects this interface; it cannot upgrade the provider's
-release verdict or establish mathematical correctness.
-
 For a simulation-deferred paper, retain the actual pending simulation objects
 and prohibit result-dependent assertions. A scoped verified-theory delivery may
 exclude those assertions from its required release closure, with that exclusion
@@ -92,7 +84,7 @@ made visible. Never remove a required dependency merely to obtain a green check.
 
 Resolve the installed workflow directory as `WORKFLOW` and the existing absolute
 research project directory as `PROJECT`. The shell variables below are illustrative
-path bindings, not paths to create blindly. Python 3.9+ on macOS/Linux is enough;
+path bindings, not paths to create blindly. Python 3.10+ on macOS/Linux is enough;
 the scripts use the standard library and do not install anything.
 
 ```bash
@@ -160,7 +152,7 @@ receipt fields, not instructions to manufacture scientific support:
 | ideas | `feasibility`, `falsifiers` |
 | literature | `source_claims`, `nearest_neighbors` |
 | design | `identification`, `evidence_plan` |
-| theory, when applicable | `proof_scope`, `independent_proof_review`; when the proof-lineage interface is used, also attach its current status report as evidence |
+| theory, when applicable | `proof_scope`, `independent_proof_review` |
 | empirical, when applicable | `data_lineage`, `inference`, `result_reproduction` |
 | simulation_design, when applicable | `runnable_handoff`, `implementation_checks` |
 | simulation_run, when applicable | `actual_results`, `calibration`, `mc_precision` |
@@ -176,6 +168,14 @@ and assumptions, not mandatory causal identification. `appendices` means that
 required supporting material is complete or an evidenced judgment that none is
 needed. No accepted review findings can still satisfy `findings_resolved` through
 a real no-open-findings report. Never invent a theorem, application or appendix.
+
+For the first author-facing manuscript, attach the applicable findings from
+the writer's `references/first-draft-review.md` to existing evidence.
+`wording` covers first-use definitions and supported contribution language,
+`citations` covers source-to-sentence checks, and `appendices` covers placement
+and intact proof dependencies. Use `cross_file` and `rendered_candidate` for
+actual synchronization and rendering, and `scope_label` for honestly deferred
+branches. Reuse existing check IDs and records.
 
 Ready theory, review and submission receipts require distinct worker/reviewer
 identifiers. This is an integrity check, not proof of independence. Preserve the

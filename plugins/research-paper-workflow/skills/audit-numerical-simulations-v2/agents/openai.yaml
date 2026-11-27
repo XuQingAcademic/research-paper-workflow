@@ -1,0 +1,6 @@
+interface:
+  display_name: "数值模拟科学性核查 v2"
+  short_description: "对象绑定、随机流、断点恢复、失败谱系与对抗发布验收"
+  default_prompt: "Use $audit-numerical-simulations-v2 to audit this simulation from theorem binding through deterministic execution, evidence ceilings, and adversarial release tests."
+policy:
+  allow_implicit_invocation: true

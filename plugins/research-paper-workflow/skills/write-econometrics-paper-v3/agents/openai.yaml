@@ -1,0 +1,6 @@
+interface:
+  display_name: "Write Econometrics Paper v3"
+  short_description: "Claim-scoped econometrics writing, citation, novelty, and release audit"
+  default_prompt: "Use $write-econometrics-paper-v3 to draft, revise, or release-audit this paper with proof, simulation, citation, and wording ceilings."
+policy:
+  allow_implicit_invocation: true

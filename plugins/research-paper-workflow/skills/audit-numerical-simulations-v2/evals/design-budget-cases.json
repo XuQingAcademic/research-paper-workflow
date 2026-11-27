@@ -1,0 +1,124 @@
+{
+  "purpose": "Evaluate scientific decisions and budget arithmetic from bounded synthetic evidence; this file does not change the simulation manifest schema.",
+  "execution": "Give an independent evaluator only each case's prompt and artifacts with this skill. Permit read-only reasoning and arithmetic; do not run simulations or contact services. Keep evaluator_notes hidden until scoring. Judge the actual decisions and computed quantities, not wording or regex matches.",
+  "cases": [
+    {
+      "id": "signal_is_not_nuisance_complexity",
+      "prompt": "请只读审查这组设计能否说明第一阶段对非线性稳健，并给最小必要改进。保留现有线性基准。",
+      "artifacts": {
+        "dgp": "Z,V,epsilon are mutually independent N(0,1). X=Z+V. Y=2Z+rho(Z)V+sqrt(1-rho(Z)^2)epsilon, rho(Z)=0.7*tanh(Z).",
+        "methods": "Only linear quantile regression estimates X|Z and Y|Z. A separate oracle uses the known conditional quantiles.",
+        "claim": "Because rho(Z) is nonlinear, this demonstrates robustness to nonlinear conditional-quantile first stages."
+      },
+      "evaluator_notes": {
+        "required_decisions": [
+          "Derive qX(tau|Z)=Z+Phi^{-1}(tau) and qY(tau|Z)=2Z+Phi^{-1}(tau); distinguish conditional dependence from marginal quantile complexity.",
+          "Keep correctly specified linear benchmark and narrow its evidence claim.",
+          "For requested nonlinear robustness, propose a distinct nonlinear nuisance regime and the same prespecified applicable learners across regimes; reserve truth access for oracle/diagnostics."
+        ],
+        "failure_modes": ["Calls the current conditional quantiles nonlinear solely due to rho.", "Deletes all linear baselines.", "Treats oracle success as feasible validity or guaranteed power upper bound."]
+      }
+    },
+    {
+      "id": "matched_null_and_illegal_zero",
+      "prompt": "这些size结果足以解释power曲线吗？只读指出能复用的部分和必要补充，不要求重跑所有旧size。",
+      "artifacts": {
+        "target": "Conditional independence of Y and X given Z.",
+        "family_A": "Z is three-dimensional; m(Z) is a fixed scalar nuisance function. Given Z, X=Z_1+V, Y=m(Z)+c*V+epsilon; V and epsilon independent N(0,1). c=0 is an exact null. Spline learner, n=400, dimension 3.",
+        "family_B": "Same independent noises and scalar m(Z), X=Z_1+V, Y=m(Z)+(0.2+c)*V+epsilon. The table labels c=0 as null.",
+        "saved_A_anchor": "A c=0, spline, n=400, dimension 3; DGP, tuning, grid, bootstrap, code/config and valid replicate IDs were independently verified to match current A power. Size is 0.052 with R=2500.",
+        "extra_size": "Many independent heavy-tail null designs use linear QR, n=800, dimension 1. Their sizes are close to nominal."
+      },
+      "evaluator_notes": {
+        "required_decisions": [
+          "Reuse verified matching A anchor; extra stress nulls need not be deleted or duplicated.",
+          "Recognize B at c=0 is alternative, since its V coefficient is 0.2; c=-0.2 yields a mathematical null if admissible, otherwise a separately justified legal companion is needed.",
+          "Do not use unrelated learner/n/dimension stress results to certify B power; distinguish design matching from shared random draws."
+        ],
+        "failure_modes": ["Accepts c=0 by label.", "Requires every size and power table to be identical.", "Recomputes valid A anchor without a changed dependency."]
+      }
+    },
+    {
+      "id": "complete_budget_with_memory_bound",
+      "prompt": "估算完成这套全部剩余模拟的工作量和在当前机器上的工期；统计量和显著性水平都要交付。只计算预算，不启动计算。",
+      "artifacts": {
+        "scope": "2 nuisance regimes x 3 dimensions x 2 sample sizes x 2 learners = 24 cells. Every cell requires R=1200 and B=799. Each cell emits 3 statistics at 2 significance levels from the same already-reused fitted/resampling process.",
+        "reuse": "4 of the 12 fast-learner cells are fully completed and independently verified reusable. None of the 12 slow-learner cells are reusable; 2 have old incompatible results that require complete replacement, and 10 are not run.",
+        "timing": "For this synthetic fixture only, validated official-parameter timings apply to every cell: fast fit 2 sec + statistic 0.2 sec + 0.001 sec per resample; slow fit 20 sec + statistic 1 sec + 0.002 sec per resample. No resample refit. One thread per worker.",
+        "hardware": "4 available CPU cores, 16 GB total permitted simulation memory. Fast worker peak 0.8 GB; slow worker peak 6 GB; overhead already included in the permitted limit. Ignore startup overhead in work calculation. No throughput scaling measurement.",
+        "calendar": "Code implementation complete; final validation and result assembly duration unknown. Queue delay does not apply locally. No price requested."
+      },
+      "evaluator_notes": {
+        "required_quantities": {
+          "fast_remaining_replications": 9600,
+          "slow_remaining_replications": 14400,
+          "fast_work_seconds": 28790.4,
+          "slow_work_seconds": 325411.2,
+          "total_worker_hours": 98.38933333333333,
+          "max_simultaneous_slow_workers": 2,
+          "slow_work_two_worker_lower_bound_hours": 45.196
+        },
+        "required_decisions": [
+          "Keep all dimensions, sample sizes, regimes and the expensive learner; place incompatible cells in needs-rerun instead of either reuse or double counting.",
+          "Do not multiply by 3 statistics x 2 levels because the stated implementation actually shares computation.",
+          "A CPU-only 24.597-hour ideal is not feasible with 4 slow workers because 24 GB exceeds 16 GB. State memory bottleneck and conditional wall-time estimate separately from total worker hours.",
+          "Keep remaining validation/assembly time unknown; do not turn a compute estimate into an exact delivery deadline."
+        ],
+        "failure_modes": ["Budgets only an easy dimension or fast learner.", "Counts old incompatible cells twice.", "Promises fourfold speedup without considering memory."]
+      }
+    },
+    {
+      "id": "short_timing_is_not_a_smaller_goal",
+      "prompt": "新机器还没到。想知道所有维度、所有方法的正式实验多久跑完；如果R和B各减半能否四分之一时间完成？不要删实验范围。",
+      "artifacts": {
+        "scope": "Three dimensions, four sample sizes and learners QR, spline and neural. Existing pilot timed only the smallest sample at the lowest dimension with QR. All other branches lack validated timings.",
+        "old_configuration": "R=2400, B=1599. Proposed new values are R=1200, B=800.",
+        "pilot": "At the measured branch, each replicate costs 8 seconds fitting + 0.002 seconds per resample, excluding setup. New machine has more memory but no speed measurement."
+      },
+      "evaluator_notes": {
+        "required_decisions": [
+          "For measured branch, compute the approximate ratio 0.5*(8+800*0.002)/(8+1599*0.002), about 0.429, rather than a quarter.",
+          "Keep unmeasured spline/neural and larger dimension/sample branches in the full matrix as unknown or justified scenario ranges; the QR pilot does not identify full absolute cost.",
+          "Use representative future timings to reduce uncertainty; do not promise specific new-machine days from memory alone or shrink to the pilot branch."
+        ],
+        "failure_modes": ["Reports the short timing subset as the full goal.", "Multiplies core count as a verified speedup.", "Invents exact remaining branch timings."]
+      }
+    },
+    {
+      "id": "phase_is_not_replication_count",
+      "prompt": "A只有800次是不是不能用于论文，B有5000次是不是可以当正式power？请根据证据判断，不运行新的模拟。",
+      "artifacts": {
+        "A": "A frozen confirmatory null design, prespecified target MCSE <=0.008 at p around 0.05, actual valid R=800, rejection=0.05; no failed/duplicate reps, independent calibration and relevant checks passed.",
+        "B": "A pilot tuned after reviewing results, R=5000, null rejection 0.12 at nominal 0.05 and alternative rejection 0.60; directory called formal_power. No fresh confirmation after tuning."
+      },
+      "evaluator_notes": {
+        "required_decisions": [
+          "A MCSE sqrt(0.05*0.95/800) about 0.007706, meets its specified precision; no universal replication threshold rules it out.",
+          "B large R and directory name do not establish confirmatory status. Its calibrated-power claim is not supported by null size; increasing R alone will not fix distortion.",
+          "Report actual R, phase, evidence uses and missing confirmation rather than merely relabeling outcomes."
+        ],
+        "failure_modes": ["Says 2000 is mandatory for every paper result.", "Approves B power because R=5000.", "Calls B 0.60 a validated power advantage despite size mismatch."]
+      }
+    },
+    {
+      "id": "separate_robustness_is_not_joint",
+      "prompt": "请总结稳健性，说明KS比CvM异常的原因；并告诉我最密grid和最多cutoff联合设置的结果。",
+      "artifacts": {
+        "verified_results": [
+          {"grid": 13, "cutoffs": 48, "KS_p": 0.91, "CvM_p": 0.45},
+          {"grid": 25, "cutoffs": 48, "KS_p": 0.88, "CvM_p": 0.44},
+          {"grid": 13, "cutoffs": 96, "KS_p": 0.39, "CvM_p": 0.43}
+        ],
+        "checks": "The saved bootstrap draws reproduce all numbers. No joint grid=25/cutoffs=96 run exists. No mechanism analysis beyond statistic definitions was performed."
+      },
+      "evaluator_notes": {
+        "required_decisions": [
+          "Summarize actual single-factor evidence and KS cutoff sensitivity without implying all joint configurations are stable.",
+          "Report the joint result as not run; no synthetic p value or pasted values from different runs.",
+          "Distinguish verified arithmetic from potential KS/CvM sensitivity explanations; do not claim that the cause has been empirically isolated."
+        ],
+        "failure_modes": ["Invents the joint p value.", "Treats a plausible statistic mechanism as demonstrated causation.", "Automatically launches broad new robustness computations beyond the summary request."]
+      }
+    }
+  ]
+}

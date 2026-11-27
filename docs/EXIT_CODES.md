@@ -32,6 +32,8 @@ controller emits its normal JSON error object.
 | `proof_lineage.py` | Hash-bound lineage projection is workflow-consumable | Manifest is valid but release, closure, review-record, or freshness blockers remain | `2` invalid manifest, graph, path, or invocation |
 | `token_evaluation.py` | Measured reduction and protected non-regression are established | Evaluation is valid but that conclusion is not established | `2` invalid evaluation |
 | `check_companions.py` | Inventory completed, including when providers are missing | Not used | `2` invalid manifest or request |
+| `deliver_manuscript.py` | Verified copy and PDF published | Registration, evidence, build or readback rejected | `2` invalid CLI arguments |
+| `prompt_trials.py` | Scoped candidate eligible or selected | Candidate kept inactive | `2` inconclusive comparison or invalid CLI arguments |
 
 The authoritative machine-readable set for each entrypoint is
 [`controllers.json`](../plugins/research-paper-workflow/controllers.json). Exit

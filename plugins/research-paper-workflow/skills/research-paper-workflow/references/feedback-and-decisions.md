@@ -3,6 +3,12 @@
 Use this for accumulated comments, changed research direction or cross-stage
 resumption. A local sentence edit does not require a new feedback database.
 
+For reusing or correcting project experience, apply
+[goal-and-learning.md](goal-and-learning.md). Keep a fact, observation, tentative
+explanation and reusable rule distinct, and preserve the evidence and scope of
+each. Record corrections and affected consumers in the existing owner records;
+do not create a parallel memory ledger or silently overwrite the original note.
+
 ## Record once in the existing project
 
 Find the project's revision notes, author locks, mentor feedback log or equivalent
@@ -57,11 +63,29 @@ the research scope materially changes. A single formatting preference does not
 require a new track. Never reactivate superseded guidance just because a retrieved
 old roundtable was long or confident.
 
+A newer AI review is evidence to adjudicate, not automatic truth or edit
+permission. In a read-only task leave older files alone and explain the current
+decision. At the next authorized continuation compare the review against the
+old recommendation and its actual evidence, preserve the reason for any
+supersession, and align only the relevant authorized working records. Candidate
+ranking, exploratory value and target-venue readiness are separate decisions.
+
+For inherited numerical evidence, resolve the code/config that actually
+produced it, including failure/fallback paths and available counts. A corrected
+current runner cannot retroactively certify an old run; missing failure counts
+remain unknown, not zero. Reopen only affected result claims and route them to
+the simulation specialist. A source, PDF and ZIP also have separate version
+identities: changing the source does not update either deliverable. Check the
+versions consumed by the present handoff; rebuild only when that delivery is
+within the user's task.
+
 ## Resume with a short derived summary
 
-Before substantive continuation, recover current target/method, active artifacts,
-supported claims and limits, recent decisions with provenance, unfinished accepted
-comments and next action. Generate a compact summary only where it helps handoff;
+Before substantive continuation, recover current target/method and acceptance,
+the decisive open bottleneck, active artifacts, supported claims and limits,
+recent decisions with provenance, unfinished accepted comments and next action.
+Exclude contested or superseded experience from current advice; retain its
+history and correction locator. Generate a compact summary only where it helps handoff;
 link to the authoritative records and state the version/date. Refresh affected
 parts after a real change; do not re-read all papers or restart passed stages.
 
@@ -75,3 +99,25 @@ record once; rebuild the derived view after meaningful updates. During an issue,
 retain its original problem, target, preserved content, actual change, check
 result and retain/rework reason in that existing record. Do not repeat unchanged
 sections or fill unavailable time/cost measures with zero.
+
+## Reduce avoidable return visits
+
+Group accepted comments that share a scientific object and its real downstream
+dependencies into one bounded revision and synchronization pass. Do not collect
+unrelated open issues into a compulsory whole-paper rewrite. If contribution
+priority changes, trace the corresponding theory explanation, simulation/empirical
+analysis, abstract and conclusion; a change of emphasis is not permission to hide
+negative results or delete valid evidence.
+
+Recover already chosen citation presentation, theorem-title and typography
+preferences from the current project/template before asking again. They remain
+project choices, not portfolio-wide bans on a statistic, grid theory, plotting
+language, hyphens or a journal's formatting. A new template or material author
+choice may supersede them; do not infer one from an older sample paper.
+
+Record separately: decision adopted, reusable snippet delivered, actual source
+edited, affected content checked, and current PDF/package rebuilt. A code block
+in chat is not a file edit; source changes are not evidence that an existing ZIP
+contains them. Check the actual files consumed by the requested handoff once the
+related batch is stable. Reopen only a real error, new relevant evidence or changed
+author choice; do not continue low-value rewrites after the agreed target is met.

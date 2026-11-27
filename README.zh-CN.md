@@ -23,9 +23,24 @@ Research Paper Workflow 负责连接 idea、文献、研究设计、理论证明
 它的编排与状态框架可用于不同领域的定量研究；目前最深入的专门路由、接口和示例
 集中在计量经济学、统计方法与数量经济学。
 
-> **当前状态：v0.1.1 Research Preview。** 控制器已具备本地回归测试，但本项目
+> **当前状态：v0.2.0 Research Preview。** 控制器已具备本地回归测试，但本项目
 > 不保证 idea 一定原创、文献检索穷尽、定理正确、识别成立、论文发表或所有维度
 > 单调改善。详细边界见[能力与声明范围](docs/CLAIMS.md)。
+
+## 试跑新版终稿交付
+
+对已登记证据的 LaTeX 风险研究项目，新版从逐次记录重算严格超阈且实际放行的
+次数和分母，将数字来源与登记的定理适用条件写入正文，再重编并核验 PDF。
+
+[运行原创合成示例](examples/registered-delivery/README.md)。安装所需 TeX 工具后，
+在仓库目录运行：
+
+```bash
+python3 -B examples/registered-delivery/check_demo.py --output registered-demo-output
+```
+
+示例有 6 次试验、4 次实际放行，其中 2 次属于严格超阈误放。验收同时检查重复
+结果的合并、独立重编 PDF 和错误定理定位的拒收。[项目接入指南](docs/REGISTERED_DELIVERY.md)。
 
 ## 适合谁，以及五分钟内能得到什么
 
@@ -177,7 +192,7 @@ provider 时，只暂停依赖该能力的分支，不会把缺失能力伪装�
 可使用以下只读命令检查当前环境中有哪些 companion skills：
 
 ```bash
-python3 plugins/research-paper-workflow/scripts/check_companions.py
+python3 plugins/research-paper-workflow/scripts/check_companions.py --skill-root plugins/research-paper-workflow/skills
 ```
 
 该报告只表示“能否发现”，不会把安装状态写成科学有效性。公开命令入口及其证据
@@ -192,7 +207,7 @@ python3 plugins/research-paper-workflow/scripts/check_companions.py
 
 完整记录见 [THIRD_PARTY.md](THIRD_PARTY.md)，机器可读依赖见
 [`dependencies/skills.json`](plugins/research-paper-workflow/dependencies/skills.json)。
-v0.1.1 没有打包第三方 skill 的实现代码。
+v0.2.0 没有打包第三方 skill 的实现代码。
 CI 中执行的 GitHub Actions 另行记录在 `.github/actions-dependencies.json`，不会与
 运行时科研能力混为一谈。
 
@@ -218,7 +233,7 @@ python3 scripts/package_plugin.py
 可使用跨平台的标准库验包命令同时核对两层哈希、路径和 manifest 身份：
 
 ```bash
-python3 scripts/verify_release.py dist/research-paper-workflow-0.1.1.zip
+python3 scripts/verify_release.py dist/research-paper-workflow-0.2.0.zip
 ```
 
 ## 隐私边界

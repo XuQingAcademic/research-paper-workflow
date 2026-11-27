@@ -22,9 +22,9 @@ SPEC.loader.exec_module(MODULE)
 class CompanionCheckTests(unittest.TestCase):
     def test_discovers_frontmatter_name_and_marks_missing(self):
         with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
+            root = Path(temporary) / ".installed-marketplace" / "skills"
             present = root / "provider-folder"
-            present.mkdir()
+            present.mkdir(parents=True)
             (present / "SKILL.md").write_text(
                 "---\nname: available-provider\ndescription: Test provider.\n---\n",
                 encoding="utf-8",
@@ -108,6 +108,8 @@ class CompanionCheckTests(unittest.TestCase):
                     "research-paper-workflow/skills/research-paper-workflow/SKILL.md",
                     names,
                 )
+                for companion in ("audit-numerical-simulations-v2", "write-econometrics-paper-v3"):
+                    self.assertIn(f"research-paper-workflow/skills/{companion}/SKILL.md", names)
                 self.assertIn("research-paper-workflow/LICENSE", names)
                 self.assertIn("research-paper-workflow/schemas.json", names)
                 manifest_name = "research-paper-workflow/MANIFEST.sha256"

@@ -1,123 +1,125 @@
 ---
 name: research-paper-workflow
-description: Coordinate an econometrics or quantitative-economics paper from research ideas through literature, design, proofs, empirical evidence, manuscript, independent review, revision, and a submission package. Use for an end-to-end paper workflow or resuming a multi-stage research project; route single proof, simulation, or editing requests directly to the specialist skill.
+description: Coordinate an econometrics or quantitative-economics paper from research ideas through literature, design, proofs, empirical evidence, manuscript, independent review, revision, and a submission package. Use for an end-to-end paper workflow or resuming a multi-stage research project; route isolated proof, simulation, or prose-editing requests directly to the specialist skill.
 ---
 
 # Research Paper Workflow
 
 Turn a research question into a source-grounded, reproducible manuscript using
-the research capabilities available in the current environment. Own sequencing,
-handoffs, and continuity;
+the installed research portfolio. Own sequencing, handoffs, and continuity;
 delegate scientific decisions to the relevant specialist. The deliverable may
 be a complete paper or an explicitly simulation-deferred manuscript, depending
 on the user's instruction and the evidence actually available.
 
+For a complete LaTeX risk-results manuscript enrolled in controlled delivery,
+the workflow host publishes through
+[`scripts/deliver_manuscript.py`](scripts/deliver_manuscript.py). The editor
+works on the draft and the host runs the evidence check outside the editing
+session. Use the existing project entry and
+[the controlled delivery instructions](references/controlled-manuscript-delivery.md).
+
 ## Start from the actual project
+
+Discover the capabilities actually available. Read
+[dependency-resolution.md](references/dependency-resolution.md) when a specialist
+is missing or supplied by a different provider. Continue work independent of
+the missing capability and leave dependent conclusions pending.
 
 Read the active manuscript, project instructions, existing `.paper/` state, and
 the smallest set of current results needed to identify the next unmet objective.
 Respect existing filenames, language, programming environment, and author
 decisions. Do not initialize a second claims database or rebuild finished work.
-For a new project, infer a reasonable working question and paper type, propose
-concrete candidate ideas, and continue low-cost research while material author
-choices are pending. Do not require a completed idea before helping generate it.
+For a new project, recover a concrete working question and paper type, then use
+the idea specialist to establish what the strongest available solutions already
+deliver and develop mechanisms for the remaining obstacles. Continue bounded
+discovery while material author choices are pending; no chosen idea is required
+to start this work.
 
-Resolve capabilities from the skills and tools actually available in the
-current environment; never assume the maintainer's local portfolio is installed.
-Read [dependency-resolution.md](references/dependency-resolution.md) when a
-specialist named below is missing, supplied by a different provider, or relevant
-to a public installation. Continue work that remains valid without the missing
-capability, keep dependent stages pending, and report the bounded gap. A generic
-fallback may organize evidence, but it must not inherit a specialist skill's
-release claims or validation status.
+When the author requires empirical-first discovery or a real application, apply
+the [empirical-first entry gate](references/empirical-bridge.md#empirical-first-entry-gate)
+at candidate recommendation, design freeze and resumption. Require documented
+real-world mechanism, inspected usable data and an actual baseline probe before
+advancing the empirical route. A prior recommendation, manuscript or change of
+paper-type label does not discharge this dependency.
 
 Classify the paper as `theory`, `methods`, `empirical`, or `hybrid`. Classify
 simulation execution as `run`, `deferred`, or genuinely `not-applicable`.
 Limited compute is `deferred`, never `not-applicable`. Default to bounded smoke
 and pilot work until measured resource needs justify production runs.
 
-Read [stage-playbook.md](references/stage-playbook.md) for the next relevant
-stages and [handoffs-and-state.md](references/handoffs-and-state.md) for every
-multi-stage project. Use [portfolio-routing.md](references/portfolio-routing.md)
-to resolve ownership. Load each selected skill's actual `SKILL.md` and required
-references before invoking it. Installed availability and current project
-instructions outrank this routing map.
+For long/resumed work, recover the outcome and current bottleneck with
+[goal-and-learning.md](references/goal-and-learning.md). For cross-stage feedback,
+material iterative optimization, an explicitly activated continuous cycle, or
+requested prompt/model adaptation, use the matching section of
+[continuity-and-revision-routing.md](references/continuity-and-revision-routing.md).
+Preserve the frozen objective, actual author decisions, scientific invariants,
+bounded trade-offs and required independent checks; do not activate these
+maintenance controllers for an ordinary bounded question. Unknown or tied prompt
+trials keep the configured baseline.
 
-For every theory-bearing cross-skill handoff, also read
-[proof-lineage.md](references/proof-lineage.md). Consume only the specialist's
-hash-bound lineage projection; do not copy theorem or proof content into workflow
-state or interpret a valid graph as mathematical verification.
+At a consequential investment boundary or decision-changing evidence, apply
+[strategic-review.md](references/strategic-review.md): reassess research value
+and the route separately from local execution quality, then continue, pivot,
+park or stop at the evidence-supported scope. Reuse existing design/review notes;
+do not add a recurring panel, score or compulsory controller. A frozen design
+is a comparison baseline, not a commitment to preserve a defeated idea.
 
-When feedback accumulates, the research target changes, or work resumes across
-stages, read [feedback-and-decisions.md](references/feedback-and-decisions.md).
-Reuse the project's existing feedback and decision records; distinguish advice
-collected from changes authorized, implemented and checked. Carry forward a short
-current-state summary derived from those records, not a competing claims ledger.
-When the existing records have explicit structured fields, use the read-only
-[resume-view.md](references/resume-view.md) adapter to rebuild that summary and
-check whether a saved view is stale. Unmapped prose still needs source reading;
-a generated view cannot authorize work or settle scientific questions.
-
-For iterative paper optimization, use
-[iterative-optimization.md](references/iterative-optimization.md). A cycle can
-contain several issues from eight optional areas; execute one selected issue at
-a time, including its necessary dependent edits. There is no fixed three-round
-count or theory/notation/writing order. Preserve whether the user requested one
-item or continuous completion of the selected cycle; do not turn serial work
-into repeated approval stops or parallel edits to unrelated issues.
-Keep the frozen paper objective and manuscript spine above the local issue
-queue. Admit a newly discovered item to the active cycle only when its relation
-to that objective and the concrete consequence of leaving it unresolved can be
-stated. Reassess the whole queue after each accepted item; do not keep following
-the vocabulary or formatting neighborhood of the last edit.
-For every material cycle, also read
-[non-regression-contract.md](references/non-regression-contract.md) and define
-what must improve, what must not regress, bounded trade-offs, paired evidence,
-rollback conditions, and final whole-candidate review dimensions. Keep this
-lightweight in ordinary single-item work and machine-checkable in continuous
-revision. This contract supports a bounded non-regression claim; it does not
-promise that every paper dimension improves.
-Newly initialized continuous cycles also enforce the v2 issue package's
-objective-link and admission fields; legacy v1 cycle state remains readable for
-project continuity.
-
-When the user requests one-start autonomous revision through an author-reviewable
-candidate, also read [continuous-revision.md](references/continuous-revision.md).
-Freeze its project contract, keep `.paper/revisions.yaml` as the issue authority,
-and use `scripts/revision_cycle.py` for the single-active queue, hash-bound
-reviews, author pauses and convergence checks. New cycles require
-`paper-revision-contract.v2`; its current non-regression report is a readiness
-gate, and accepted full reviews bind both the manuscript and that report. Legacy
-v1 cycles remain readable but do not gain a retroactive machine-enforced report.
-Continuous mode does not authorize
-named experts, new compute, external access or submission; those must be present
-in the frozen contract and remain subject to their own skills and permissions.
+Route isolated proof, simulation and prose work directly to its specialist.
+A coordinated revision is needed when several specialist-owned objects change
+together, including assumptions/scope, notation and manuscript placement.
+For an actual multi-stage project, read [stage-playbook.md](references/stage-playbook.md)
+and [handoffs-and-state.md](references/handoffs-and-state.md); use
+[portfolio-routing.md](references/portfolio-routing.md) for ownership. Read each
+selected skill's actual instructions and required resources. Reuse current
+valid evidence and existing records; do not rebuild completed work.
 
 ## Move the paper forward
 
-1. **Frame and generate ideas.** Use `mine-econometrics-ideas` for candidate discovery and substantive comparison, reading its current entrypoint. Reuse existing candidate IDs, nearest-neighbor evidence, rejection reasons and actual probes; consume its handoff rather than create a second idea ledger. For an already selected mature idea, reopen only material gaps. Identify the scientific question, friction,
-   estimand or testing target, proposed change, and who benefits. Compare a few
-   materially different candidate ideas, their nearest neighbors, feasibility,
-   and cheapest falsifiers. Preserve the reasons and explicit evidence-based reopen conditions for rejected or parked ideas; a resumed task or new title does not by itself reverse them.
+1. **Recover the question and strongest known solution.** Use
+   `mine-econometrics-ideas` for discovery and scientific comparison, reading its
+   current entrypoint. Reuse candidate IDs, source locators, actual derivations,
+   probes and rejection reasons; consume its records rather than create a second
+   idea ledger. Recover the original target, information, assumptions, guarantee
+   and reason the question matters. Before an investment recommendation, consume
+   an actual attempt to solve that same problem with the strongest applicable
+   result or combination of results, including its achieved scope and exact
+   remaining obstacle. A list of related papers or failed title search is not
+   this comparison. `paper-lookup`, `citation-management` and `deepread` supply
+   the exact source evidence needed by the idea specialist. Reopen only stale or
+   material gaps for an already selected mature idea.
    For novelty-sensitive work, several candidates, a long/resumed search, or an
    autonomous run, read [search-and-portfolio-control.md](references/search-and-portfolio-control.md).
    Bind the existing idea record to its optional controller sidecar and use
    `scripts/idea_portfolio.py`; do not copy the scientific argument into a second
    ledger. The controller exposes candidate diversity, actual probes, search
    frontiers, stop reasons and reopen conditions but never certifies novelty.
-2. **Search and verify literature.** Use `paper-lookup`, then
-   `citation-management` and `deepread`. Reopen exact source versions and
-   locators before adopting a claim. Build a nearest-neighbor comparison and a
-   dated search record; unresolved close neighbors constrain novelty language.
-   Compare equivalent statistics and calibration as well as proof routes; state
-   the actual new capability, insight and motivating problem before drafting
-   contribution language. In controlled searches, keep named-method,
-   deanchored-functional, citation, version, implication/equivalence,
-   component-composition, cross-domain and contradictory-evidence paths visible;
-   mark a path not applicable only with a substantive reason.
-3. **Freeze the research design.** Choose the claim and paper spine; establish
+2. **Develop and test a contribution from the remaining obstacle.** Let the
+   idea specialist develop materially different mechanisms and run the cheapest
+   decisive derivation, construction, counterexample or diagnostic for each
+   promising route. Literature reconstruction and mechanism development iterate:
+   a new mechanism may expose a stronger comparison, whose failure or success
+   changes the next mechanism. Preserve the original target and make any change
+   of information, assumptions or guarantees explicit. Bounded work on a hard
+   load-bearing bridge is justified before the whole theorem is closed. Before
+   recommending substantial investment, assess the actual increment beyond the
+   reconstructed solution and why it matters, separately from correctness and
+   feasibility, using [strategic-review.md](references/strategic-review.md).
+   When the scope requires independent value assessment, consume the idea
+   specialist's existing assessment rather than repeat it as a second panel.
+   Preserve the first investment judgment and
+   its evidence in the existing record so later changes can be explained.
+   If the comparison defeats a route, use its exact obstruction to guide a new
+   route or move on; a renamed or narrowed claim does not inherit the old verdict.
+3. **Freeze the supported research design.** Select a route for substantial
+   proof, production compute or manuscript expansion only after the preceding
+   comparison, decisive probe and contribution judgment support that commitment.
+   An unresolved discovery task can continue bounded exploration without a
+   selected paper. Choose the claim and paper spine; establish
    identifying assumptions, proof obligations, data availability, computation
    needs, benchmarks, failure criteria, and evidence required for each claim.
+   Before expanding the outline, recover the contribution hierarchy from current
+   author decisions and verified nearest neighbors using the writer's
+   `references/reader-facing-writing.md`; keep unresolved comparisons explicit.
    Specify exploratory versus confirmatory work before examining outcomes. For repeated preliminary probes, read [exploration-loop.md](references/exploration-loop.md); preserve baseline, actual costs, failed attempts and decisions.
    For a long, costly, parallel, multi-provider or autonomous run, also read
    [research-operations.md](references/research-operations.md) and use the
@@ -132,16 +134,28 @@ in the frozen contract and remain subject to their own skills and permissions.
    `prove-econometrics-theory-v2` for theory,
    [empirical-bridge.md](references/empirical-bridge.md) for real-data design and
    execution, and `audit-numerical-simulations-v2` for Monte Carlo design,
-   implementation, validation, and eventual production results. For theory
-   handoffs, validate the active roots, typed dependencies, artifact bindings,
-   specialist release state, and recorded review identity with
-   `scripts/proof_lineage.py`. A proof gap or stale lineage binding blocks only
-   its dependents; it does not prevent verified unrelated work. This controller
-   does not re-prove the result or establish reviewer independence.
+   implementation, validation, and eventual production results. Revisit strategy
+   when material evidence changes the contribution case or a bounded phase fails
+   to reduce its main uncertainty; do not default to another local repair. A proof gap
+   blocks only its dependents; it does not prevent verified unrelated work.
+   For theory-bearing cross-skill handoffs, use the bounded
+   [proof lineage](references/proof-lineage.md) interface. A hash-valid lineage
+   projection describes state and cannot certify the proof.
+   For a theory-bearing revision, apply the theory revision contract before
+   changing the manuscript: audit assumption strength against exact sources,
+   preserve null/fixed/local and other scope boundaries, and do not generalize a
+   learner-specific result to an unspecified method class.
+   Separate a conditional theorem, verified source interface, concrete-model
+   verification, and actual implementation coverage in the existing handoff.
+   An implementation sentence is not an asymptotic assumption; recover its
+   exact wording before proposing new grid, solver, or resampling theory.
    For manuscript-bearing empirical results, validate the hash-bound adapter,
    known-answer fixture, inference settings, diagnostics, output and
    interpretation ceiling with `scripts/empirical_contract.py`; a green
    structural contract does not establish identification.
+   For a changed empirical outcome/window or dependence correction, apply the
+   bridge's timing and inference-applicability check before using the new result;
+   a request not to add a theory section does not validate an inference method.
    Independent branches may run in parallel in ordinary development. During
    item-by-item optimization, any delegated work must serve the same active issue;
    leave independent optimization items queued until their turn.
@@ -152,26 +166,34 @@ in the frozen contract and remain subject to their own skills and permissions.
    `research-operation-event.v2` as described in the token and operations
    references.
 5. **Compose the manuscript as evidence matures.** Use
-   `write-econometrics-paper-v3`. Begin useful setup and literature prose early,
+   `write-econometrics-paper-v3`. For the first complete author-facing draft,
+   open the writer's `references/first-draft-review.md` before outlining.
+   Recover applicable author feedback and make the checks part of drafting and
+   verification rather than waiting for submission or the author's first review.
+   Begin useful setup and literature prose early,
    then write verified results and appendices, and finally reconcile abstract,
    introduction, title, and conclusion with delivered evidence. Drafting is
    allowed while evidence is pending; completing result-dependent claims is not.
-   When the user requests de-AI editing or a final prose-humanization pass, the
-   writer may compose the installed `humanizer` with its academic-humanizer
-   profile. Apply it only after scientific claims are stable and verify protected
-   equations, numbers, terminology, citations, and claim strength. The required
-   output remains formal academic prose.
-   The writer's terminology governance is binding across the workflow: prefer
-   the established term used by the closest verified literature, preserve its
-   scope, and record provenance for canonical terms. Do not coin a label for
-   novelty, stylistic variety, or branding. An author-defined term needs a
-   concrete gap, a definition, a mapping to the nearest literature terminology,
-   and a recorded author decision before release use.
-   Choose the requested reader-facing form: manuscript prose/proof, an explanation,
-   or a meeting brief. Do not turn a short framework briefing into a full paper
-   workflow or generate multiple formats the user did not need.
+   Use the writer's citation workflow at first adoption of a source, and its
+   result/exhibit guidance before drafting captions or analysis. Contribution
+   priority changes also reach simulation and empirical narrative, not just the
+   abstract; preserve existing valid results and actual analysis chronology.
+   For English methods/theory writing and full reader-facing proofs, apply
+   [manuscript-handoff.md](references/manuscript-handoff.md) and the current writer/
+   renderer rules. Preserve the fixed science-to-style order, applicable source
+   cards, protected mathematical meaning, terminology and evidence ceilings.
+   Main-text goal, route and key proof bridges remain recoverable; technical
+   closure remains available in text or appendices. Internal audit detail stays
+   separate from reader-facing prose. Do not create unrequested output formats
+   or treat a clean token check as semantic verification.
 6. **Reproduce and challenge.** Check data-to-table/code-to-theorem alignment,
-   citations, numbers, assumptions, builds, and rendered pages. Obtain fresh
+   citations, numbers, assumptions, builds, rendered pages, and the reader-facing
+   hierarchy. Before handing over the first complete draft, use the writer's
+   first-draft review on the actual version to repair in-scope recurring issues
+   and record any genuine evidence gaps in the existing project records.
+   Confirm that the main text itself exposes the applicable problem,
+   decisive insight, principal result and interpretation, and that auxiliary
+   implementation or closure has not displaced them. Obtain fresh
    independent review; turn each supported finding into a bounded repair and
    verification task. Keep rejected findings with reasons. For a material
    revision, compare the current candidate with the frozen baseline against the
@@ -188,28 +210,31 @@ stale or unfinished requirement and continue unaffected branches. Do not promise
 that any arbitrary idea admits a new theorem or publishable conclusion; record
 a falsified idea or infeasible design and develop a reviewable alternative.
 
-## Optional expert supervision and independent roles
+## Mentor supervision and independent roles
 
-Preserve explicitly requested expert, roundtable, and review invocations and
+Preserve explicitly requested mentor, roundtable, and review invocations and
 authorizations across the active task. Do not interpret this workflow's name as
-a literal invocation of an explicit-only component. If a compatible governed
-supervision provider is installed and explicitly requested, let that provider
-own its contract, expert selection, evidence readiness, private-source
-boundaries, state, and gates. Read its actual instructions. Private expert
-profiles, corpora, memory, and communications are never assumed, bundled, or
-opened by this public workflow.
+a literal invocation of an explicit-only component. For the optional governed
+profile, use `research-mentor-supervisor`: its G1 covers the research contract,
+G2 covers the first load-bearing candidate before expensive downstream work,
+and G3 covers the exact scoped delivery. Run its own state tool and gates.
+Mentor selection, evidence readiness, private-source boundaries, and any bounded
+roundtable are owned by those skills. Read their actual instructions.
 
 For ordinary end-to-end work, an independent generic reviewer can challenge the
-design and final candidate without invoking a named expert. When the user
+design and final candidate without invoking a named mentor. When the user
 authorizes `review-paper`, `review-paper-code`, or `audit-analysis`, use those
 specialized reviews in their applicable scope. See the runnable prompt profiles
 in [usage-profiles.md](references/usage-profiles.md).
 
 Give reviewers the claim, exact artifacts and evidence, not the desired verdict.
+For first-pass judgment versus checking a repair, use the scoped review guidance
+in [goal-and-learning.md](references/goal-and-learning.md); a fresh assessment
+does not erase unresolved findings, and a persuasive reply does not close them.
 Use fresh contexts for final scientific checks. Batch parallel reviews within
 available capacity; several roles in one worker are not independent reviewers.
-Do not stack a multi-role review, expert roundtable, and supervisor at every
-step. Escalate a concrete unresolved question only when it warrants it.
+Do not stack an eight-role review, three-mentor roundtable, and supervisor at
+every step. Escalate a concrete unresolved question only when it warrants it.
 
 ## Handle incomplete simulations honestly
 
@@ -238,13 +263,6 @@ Proof ledgers, simulation manifests, and `.research-supervision/` retain their
 own authority. Use `.paper/workflow/` only for the orchestration plan and
 hash-bound stage receipts pointing to those artifacts. An existing equivalent
 workflow store may be adapted instead; do not overwrite it.
-
-The optional proof-lineage manifest is likewise a specialist-produced,
-project-local interoperability record. It preserves identifiers, versions,
-relationships, locators, hashes, status, and release scope only. The workflow
-may rebuild `proof-lineage-status.v1`, but neither that report nor the manifest
-may replace the specialist's obligation ledger, proof bundle, validator receipt,
-or review.
 
 For qualifying long-running work, the optional operations log under the same
 directory owns only execution telemetry and blockers. For qualifying idea work,
@@ -286,14 +304,11 @@ them directly, and preserve partial progress before optional exploration. Reuse
 unchanged valid receipts. Do not run Git status or history commands in a
 workspace that has no repository metadata.
 
-Use three explicit phases when a deadline is stated: by the end of the first
-third every required file exists with its full schema and an honest provisional
-state; by the end of the second third the decisive evidence and direct checks
-are complete; the final third is reserved for targeted repair, serialization,
-and return. Do not begin an optional project-wide scan in the final phase. A
-failing optional assertion is recorded and investigated only when it can change
-a required result; it does not justify withholding otherwise valid required
-artifacts until the process is killed.
+With a deadline, prioritize the required artifacts, decisive evidence and direct
+checks before optional expansion, reserving enough time for repair and delivery.
+Choose the schedule from the actual task; no universal third-by-third template
+or additional audit is required. Do not withhold valid scoped deliverables for
+unrelated optional checks, and do not drop required evidence to meet the clock.
 
 For a resume task, resolve the active pointer, verify the declared active-state
 bindings and inspect the lock semantics, then write the requested resume

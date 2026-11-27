@@ -85,12 +85,12 @@ govern estimator and inference choices.
 | Lost progress or repeated work across stages | Hash-bound stage receipts and next actions in `.paper/workflow/` | Local attestations cannot authenticate scientific truth |
 | Production simulation cannot finish | Runnable handoff and explicit deferred status; re-open prose when results arrive | No completed simulation or submission claim until actual evidence exists |
 | Upstream PARTIAL/FAIL can evade legacy release validation | New `check_release_handoff.py` checks dependency consumption and release consistency | Existing component validators and real evidence still required |
-| Optional supervision providers were absent from a pre-public registry | Provider-neutral route entries and usage profiles | Public installations rediscover available providers and never assume a private profile |
+| Supervisor/roundtable absent from manager registry on 2026-09-05 | Explicit route entries and usage profiles | Historical gap: registration was fixed on 2026-09-06; inspect the current registry instead of using the old snapshot |
 | R&R routed to paper review by broad keywords | Direct writer-v3 R&R route | Review and response are different tasks |
 
-Pre-public development audits also identified uncompleted scientific-validation,
-state-migration and private-provider quality work. This workflow does not claim
-to repair those entire systems. It isolates the confirmed cross-skill false-green
+The existing manager audit also identifies uncompleted scientific-validation,
+state-migration and mentor-corpus quality work. This workflow does not claim to
+repair those entire systems. It isolates the confirmed cross-skill false-green
 case with a tested bridge, preserves older installations, and requires precise
 scientific receipts before claiming research completion.
 
@@ -98,7 +98,7 @@ scientific receipts before claiming research completion.
 
 The local patch connects the dedicated idea skill, adds advisory reverse claim coverage, evidence-first material re-review, explicit candidate reopen conditions and an optional bounded probe recorder. It reuses existing project IDs, ledgers and frozen-evaluation tooling. Implementations were written locally; third-party code was not vendored.
 
-Design sources: [autoresearch program at 228791f](https://github.com/karpathy/autoresearch/blob/228791fb499afffb54b46200aca536f79142f117/program.md) for bounded comparable attempts and retained failures; [academic-research-skills at f1a57bb](https://github.com/Imbad0202/academic-research-skills/tree/f1a57bbcabf5cf3da9654ac4d54d056dc6b4b7ea) for reverse-coverage advisory, re-review input order and explicit capability evidence. Their popularity does not establish local scientific performance. Public releases report measured and unmeasured effects separately.
+Design sources: [autoresearch program at 228791f](https://github.com/karpathy/autoresearch/blob/228791fb499afffb54b46200aca536f79142f117/program.md) for bounded comparable attempts and retained failures; [academic-research-skills at f1a57bb](https://github.com/Imbad0202/academic-research-skills/tree/f1a57bbcabf5cf3da9654ac4d54d056dc6b4b7ea) for reverse-coverage advisory, re-review input order and explicit capability evidence. Their popularity does not establish local scientific performance. The manager's `references/capability-evidence.json` records actual local validation and unmeasured effects.
 
 ## 2026-09-27 research-workflow comparison and compatible adoption
 
@@ -165,3 +165,36 @@ can be awaited without repeated model polling while independent work continues.
 No third-party code or prompt was copied. These mechanisms do not prove general
 token savings or scientific non-regression; those effects remain project- and
 evaluation-specific.
+
+## 2026-10-15 source-level reinspection and selective integration
+
+Read in this order: ARIS, research-epic-manager, mimeo, AutoResearchClaw,
+Scientific Agent Skills. Repository snapshots and paper versions are distinct;
+the reports describe earlier implementations than the inspected trees. This was
+a focused reading of relevant skills, implementation paths, tests and reported
+evaluation/limitations, not an execution or audit of every repository component.
+No third-party code, prompt or skill bundle is imported. Root licenses at the
+inspected revisions are MIT; vendored subcomponents are not relicensed by that.
+
+| Project and inspected commit | Specific source evidence | Local decision |
+| --- | --- | --- |
+| [ARIS](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep/tree/26b95cfa0d8747078e9e43b42e20952709e561b8) | `skills/shared-references/reviewer-independence.md`, `review-scope-limits.md`; Codex `result-to-claim` and `paper-claim-audit`; `tools/verify_paper_audits.sh`. [Report v1](https://arxiv.org/html/2605.03042v1), Sections 2.2, 3.1 and 5. | Reuse existing evidence-to-claim ownership. Clarify first-pass judgment versus repair verification, and require a concrete defect/consequence before admitting extra machinery. Do not import score thresholds, model-family acceptance labels, universal reviewer calls or a ban on useful existing hashes. |
+| [research-epic-manager](https://github.com/alexchen5/research-epic-manager/tree/5551817dc26cf945854f623ac58bfb74fef5f688) | `skills/research-project-epic-manager/references/lifecycle-and-gates.md`, `reviewer-briefs.md`, `scripts/review_engine.py`; example `project/docs/verification/report.md`. [Paper v1](https://arxiv.org/html/2609.31683v1), Sections 2.1–2.3. | Reuse compact state, just-in-time planning and negative results. Reject whole-stage downstream invalidation, a second tracker, compulsory branch/ASCII conventions and score-derived scientific acceptance. Preserve actual dependency-scoped correction instead. |
+| [mimeo](https://github.com/K-Dense-AI/mimeo/tree/a4cea1842a24515cda354a3aa9eb9763677a3cdd) | `src/mimeo/verify.py`, `refine.py`, `prompts/extract.md`. [Paper v1](https://arxiv.org/html/2609.00453v1), Sections 2–5. | Clarify that a card or matched quotation is a retrieval aid: attribution, context, conditions and implication still need source checking. Same-source derivatives are not independent corroboration. Do not import persona imitation, fuzzy/short-quote acceptance as scientific verification, or self-score refinement as demonstrated judgment transfer. |
+| [AutoResearchClaw](https://github.com/aiming-lab/AutoResearchClaw/tree/be4ba4755bf1b52220f25e13b2293b5956590070) | `researchclaw/pipeline/verified_registry.py`, `stage_impls/_analysis.py`, `copilot/controller.py`, `memory/decay.py`. [Paper v2](https://arxiv.org/html/2605.20025v2), Sections 3.3–3.6 and 4. | Clarify execution/measurement failure versus weak evidence versus valid scientific contradiction before repair/refine/pivot. Reuse specialist result contracts; numeric occurrence alone does not validate a claim's condition or denominator. Do not import score-based pivot, fixed intervention gates, best-only reporting, age-based truth decay or all 23 stages. |
+| [Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills/tree/a1043ef544e3a100c28e70a736b6cf32554d0677) | `skills/scientific-critical-thinking/SKILL.md`, `hypothesis-generation/SKILL.md`, scientific-writing evidence rules; `tests/_meta/test_repo_contract.py`. [Paper v2](https://arxiv.org/html/2609.00065v2), Sections 2, 4–6. | Reuse progressive disclosure, rival explanations and task-specific tools already present locally. Do not bulk-install the collection, add clinical review frameworks to theory papers or turn every source check into a new approval. Tests and corpus measurements do not establish task-level scientific benefit. |
+
+The paper evidence is bounded: ARIS reports observational deployment rather
+than a completed controlled benchmark; epic-manager reports one research case;
+mimeo separates knowledge access from unmeasured judgment transfer;
+AutoResearchClaw mainly uses author-run, model-judged benchmarks; Scientific
+Agent Skills measures documentation properties, not scientific outcomes. The
+two K-Dense projects are not independent team-level confirmations.
+
+The behavioral clarification has one owner, `goal-and-learning.md`; the
+entrypoint only routes to it. Existing ledgers, state formats, scripts,
+specialist scientific gates, author decisions and active projects are unchanged.
+Retain old source snapshots above as historical evidence rather than replacing
+their pins. Local validation and effects must be reported separately from these
+design sources; no general quality, speed, cost or theorem-correctness gain
+follows from reading or adopting them.

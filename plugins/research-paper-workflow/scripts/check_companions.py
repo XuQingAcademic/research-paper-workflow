@@ -36,7 +36,7 @@ def discover(roots: list[Path]) -> dict[str, str]:
         if not root.is_dir():
             continue
         for path in sorted(root.rglob("SKILL.md")):
-            if any(part.startswith(".") and part not in {".codex", ".agents"} for part in path.parts):
+            if any(part.startswith(".") for part in path.relative_to(root).parts):
                 continue
             name = skill_name(path)
             if name and name not in found:
@@ -90,7 +90,7 @@ def main() -> int:
     )
     parser.add_argument("--json", action="store_true", dest="as_json")
     args = parser.parse_args()
-    roots = args.skill_roots or [Path("~/.codex/skills"), Path("~/.agents/skills")]
+    roots = args.skill_roots or [PLUGIN_ROOT / "skills", Path("~/.codex/skills"), Path("~/.agents/skills")]
     try:
         manifest = load_manifest(args.manifest.resolve())
         found = discover(roots)

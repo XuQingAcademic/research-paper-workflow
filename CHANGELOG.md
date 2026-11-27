@@ -11,6 +11,24 @@ All notable changes to this project are documented here. The project follows
 - Add portable companion-skill installation once their public repositories are available.
 - Add externally judged and second-host validation evidence.
 
+## [0.2.0] - Research Preview
+
+### Added
+
+- A registered LaTeX delivery CLI that independently recounts strict false
+  passes, preserves numerical provenance, applies scoped TeX corrections,
+  verifies theorem locators and conditions, and checks the rebuilt PDF.
+- Bundled first-party simulation audit and manuscript writing companions.
+- An original public runnable example with a clean-rebuild check and rejection
+  of an invalid theorem locator.
+- Workflow guidance for reconstructing the strongest known solution, bounded
+  idea probes, strategic review, and frozen prompt comparisons.
+
+### Preserved
+
+- Public v0.1.1 workflow and proof-lineage interfaces, including controller
+  report schema identifiers and the existing plugin marketplace.
+
 ## [0.1.1] - 2026-09-29
 
 ### Added

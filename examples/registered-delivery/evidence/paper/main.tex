@@ -1,0 +1,34 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\newtheorem{theorem}{Theorem}
+\title{A Teaching Example for Verified Risk Reporting}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\vspace{-2em}
+
+\section{A release rule}
+Fix a rule before calibration, with population risk $r$ and $m$ independent
+Bernoulli calibration losses of mean $r$. Let $\tau$ be the risk budget and
+let $\delta$ be the allowed false-release probability. Release the rule if
+all $m$ losses are zero and $(1-\tau)^m\leq\delta$.
+
+\begin{theorem}\label{thm:teaching-release}
+For any fixed rule under this calibration design, the probability over
+calibration of releasing it with $r>\tau$ is at most $\delta$.
+\end{theorem}
+If $r>\tau$, the probability of observing no loss is
+$(1-r)^m < (1-\tau)^m \leq \delta$ whenever release is possible. If
+$r\leq\tau$, a release cannot have risk strictly above the budget.
+
+\section{Synthetic results}
+The six records are synthetic teaching data. The displayed standard error
+uses the Bernoulli plug-in formula for the joint event rate.
+
+Our independent replay documented in the accompanying synthetic teaching ledger found 2 of 6 repetitions with an actual release and population risk above the budget. The joint violation frequency is 33.33 percent with a Monte Carlo standard error of 19.25 percentage points.
+
+\section{Conclusion}
+The example illustrates reporting the joint event with its repetition
+denominator and stating the scope of the calibration guarantee.
+\end{document}

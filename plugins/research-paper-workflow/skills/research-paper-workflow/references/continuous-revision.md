@@ -46,11 +46,11 @@ Create a project-local contract such as:
   "target": "manuscript-ready-for-author-review",
   "expert_authorization": {
     "status": "confirmed",
-    "primary": "mentor-primary",
+    "primary": "primary-review-provider",
     "roundtable_members": [
-      "mentor-primary",
-      "mentor-secondary",
-      "mentor-third"
+      "primary-review-provider",
+      "methods-review-provider",
+      "inference-review-provider"
     ],
     "source_locator": "current task: project-start authorization",
     "one_round_per_issue": true
@@ -329,6 +329,53 @@ explicit reason and `nonblocking: true`; this is an attested decision, not proof
 that the issue is harmless. External submission or communication is never a
 transition in this controller.
 
+## Strategic hold without an author gate
+
+When [strategic-review.md](strategic-review.md) supports parking or stopping the
+current route, use the existing `transition` command with `strategy-hold`. This
+does not require three failed repairs or permission to stop a defeated claim.
+Ordinary checkpoints stay in existing notes; use this event only when an active
+continuous cycle must stop advancing. For example:
+
+```json
+{
+  "schema": "paper-revision-event.v1",
+  "action": "strategy-hold",
+  "decision": "stop-route",
+  "issue_id": "REV-THEORY-01",
+  "reason": "The checked source directly implies the current claimed contribution.",
+  "evidence": [{"path": "research/design.md", "sha256": "<current SHA-256>"}],
+  "reopen_if": "A checked correction defeats that implication or establishes a substantive same-question remainder."
+}
+```
+
+`decision` is `park` or `stop-route`; `issue_id` may be null for a route-wide
+decision. Evidence points to current existing scientific/decision records, not
+a new claims database. The optional `strategy_history` in the existing cycle
+state records the event; legacy states without that field remain readable.
+The controller checks nonempty reasons, reopen conditions and current evidence
+hashes, not the scientific truth or value of the decision.
+
+The status becomes `strategic-hold`, with `ready: false` and status exit code 1,
+unless a separate unresolved author pause takes precedence. Issue statuses,
+attempt counts, queue and frozen contract stay unchanged; clean full-review
+receipts are cleared. Selection, implementation/candidate transitions and review
+acceptance cannot advance the held cycle. Recording findings and synchronization
+do not lift the hold. Changed or missing supporting evidence is reported and
+does not silently restart work. Deliver the scoped stop/park decision and
+preserved work; do not poll for readiness or continue repairs to get a green state.
+
+To reopen, record `strategy-resume` with the same event schema, a nonempty
+`reason` and current `evidence` snapshots showing a supported resolution under
+the existing question, scope and resource authority. It retains the hold's
+history and does not close the original issue or certify its proof. No extra
+author approval is needed for an already authorized same-contract route.
+Material target/resource changes still need the author's actual decision and
+the appropriate project-contract procedure; this event cannot replace a contract.
+An author `pause` and a strategy hold are independent: resolve a real author
+gate through the normal `resume` first, which does not clear the strategy hold.
+Conversely, `strategy-resume` cannot bypass an unresolved author gate.
+
 ## Trigger one bounded expert escalation
 
 The controller permits `escalate` only when all are true:
@@ -395,5 +442,5 @@ The result contains only issue IDs, areas and cause classes; it omits problem
 text and never promotes a single project's finding into a global rule. A global
 candidate requires recurrence in at least two projects, or one reproducible
 severe failure plus an independent holdout. Send that bounded candidate through
-the environment's skill-maintenance process with frozen baseline/candidate
-artifacts and rubrics. Do not let this paper cycle edit global skills automatically.
+`research-skill-manager` with frozen baseline/candidate artifacts and rubrics.
+Do not let this paper cycle edit global skills automatically.

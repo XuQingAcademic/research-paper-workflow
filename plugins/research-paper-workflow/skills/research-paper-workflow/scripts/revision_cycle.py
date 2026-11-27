@@ -690,6 +690,47 @@ def queue_order(items):
     return ordered
 
 
+def current_strategy_hold(state):
+    history = state.get("strategy_history", [])
+    return history[-1] if history and history[-1]["action"] == "strategy-hold" else None
+
+
+def validate_strategy_history(history):
+    if not isinstance(history, list):
+        raise CycleError("strategy_history must be an array")
+    held = False
+    for record in history:
+        common = {"action", "reason", "evidence", "recorded_at"}
+        action = record.get("action") if isinstance(record, dict) else None
+        expected = common | {"decision", "issue_id", "reopen_if"} if action == "strategy-hold" else common
+        if not isinstance(record, dict) or set(record) != expected:
+            raise CycleError("strategy history record has unsupported fields")
+        if action == "strategy-hold":
+            if held or record["decision"] not in {"park", "stop-route"}:
+                raise CycleError("strategy hold must start an unheld phase with park or stop-route")
+            if record["issue_id"] is not None:
+                identifier(record["issue_id"], "strategy issue_id")
+            nonempty(record["reopen_if"], "strategy reopen_if")
+            held = True
+        elif action == "strategy-resume" and held:
+            held = False
+        else:
+            raise CycleError("strategy resume must resolve a recorded hold")
+        nonempty(record["reason"], "strategy reason")
+        nonempty(record["recorded_at"], "strategy recorded_at")
+        evidence = record["evidence"]
+        if not isinstance(evidence, list) or not evidence:
+            raise CycleError("strategy evidence must be a nonempty array")
+        seen = set()
+        for item in evidence:
+            if not isinstance(item, dict) or set(item) != {"path", "sha256"}:
+                raise CycleError("strategy evidence entries must contain path and sha256")
+            name = relative(item["path"], "strategy evidence path")
+            if name in seen or not re.fullmatch(r"[0-9a-f]{64}", str(item["sha256"])):
+                raise CycleError("strategy evidence paths must be unique with valid SHA-256")
+            seen.add(name)
+
+
 def validate_state(state):
     required = {
         "schema",
@@ -708,7 +749,8 @@ def validate_state(state):
         "updated_at",
     }
     fields = set(state) if isinstance(state, dict) else set()
-    if (not isinstance(state, dict) or fields not in (required, required | {"issue_schema"})
+    optional = {"issue_schema", "strategy_history"}
+    if (not isinstance(state, dict) or not required <= fields or fields - required - optional
             or state.get("schema") != CYCLE_SCHEMA):
         raise CycleError("revision-cycle.json has an unsupported schema")
     if "issue_schema" in state and state["issue_schema"] != ISSUES_SCHEMA_V2:
@@ -726,6 +768,7 @@ def validate_state(state):
     string_list(state["candidate_worker_ids"], "candidate_worker_ids")
     if state["pause"] is not None and not isinstance(state["pause"], dict):
         raise CycleError("pause must be null or an object")
+    validate_strategy_history(state.get("strategy_history", []))
     return state
 
 
@@ -795,6 +838,14 @@ def status_report(root, state, ledger):
         and all(workflow.get("stages", {}).get(stage) == "ready" for stage in required_stages)
     )
     panel_status = state["contract"]["expert_authorization"]["status"]
+    strategy_hold = current_strategy_hold(state)
+    strategy_evidence = {"current": None}
+    if strategy_hold is not None:
+        try:
+            validate_evidence_snapshots(strategy_hold["evidence"], root, "strategy hold")
+            strategy_evidence = {"current": True}
+        except (OSError, ValueError, TypeError, KeyError) as error:
+            strategy_evidence = {"current": False, "error": str(error)}
     checks = {
         "ledger_binding_current": ledger_current,
         "queue_matches_revision_ledger": state["queue"] == expected_queue,
@@ -807,6 +858,7 @@ def status_report(root, state, ledger):
         "two_independent_clean_reviews": clean_current,
         "workflow_author_review_ready": workflow_ready,
         "not_paused": state["pause"] is None,
+        "no_strategic_hold": strategy_hold is None,
         "expert_authorization_frozen": panel_status in {"confirmed", "disabled"},
     }
     ready = all(checks.values())
@@ -814,6 +866,11 @@ def status_report(root, state, ledger):
         next_action = "Deliver the frozen manuscript-ready-for-author-review package and cycle summary."
     elif state["pause"] is not None:
         next_action = "Resolve the single recorded author gate, then record a resume event."
+    elif strategy_hold is not None:
+        next_action = (
+            "Keep the recorded route investment stopped/parked; inspect its evidence and reopen condition. "
+            "Record strategy-resume only with a supported same-contract resolution; do not close unresolved issues."
+        )
     elif active:
         next_action = f"Complete and verify active issue {active[0]}."
     elif state["queue"]:
@@ -829,7 +886,7 @@ def status_report(root, state, ledger):
     return {
         "schema": "paper-revision-cycle-status.v1",
         "cycle_id": state["cycle_id"],
-        "outcome": TARGET if ready else ("paused" if state["pause"] else "in-progress"),
+        "outcome": TARGET if ready else ("paused" if state["pause"] else "strategic-hold" if strategy_hold else "in-progress"),
         "ready": ready,
         "checks": checks,
         "active_issue_id": state["active_issue_id"],
@@ -840,6 +897,8 @@ def status_report(root, state, ledger):
         "non_regression": non_regression,
         "workflow": workflow,
         "pause": state["pause"],
+        "strategy_hold": strategy_hold,
+        "strategy_evidence": strategy_evidence,
         "next_action": next_action,
         "scientific_certification": "not-established-by-this-controller",
     }
@@ -995,6 +1054,8 @@ def select_next(root, write):
     def apply(ledger, state):
         if state["pause"] is not None:
             raise CycleError("cycle is paused")
+        if current_strategy_hold(state) is not None:
+            raise CycleError("cycle has a strategic hold; resolve it before selecting work")
         items, by_id = validate_cycle_issues(ledger, state)
         active = [item for item in items if item["status"] in {"active", "verifying", "blocked_author"}]
         if active:
@@ -1050,6 +1111,29 @@ def apply_event(root, event, write):
         issue = by_id.get(issue_id) if issue_id is not None else None
         if issue_id is not None and issue is None:
             raise CycleError("event names an unknown cycle issue")
+
+        if state["pause"] is not None and action not in {"resume", "strategy-hold", "strategy-resume"}:
+            raise CycleError("cycle is paused; resolve the recorded author gate before revision transitions")
+        hold = current_strategy_hold(state)
+        if hold is not None and action not in {"strategy-resume", "pause", "resume"}:
+            raise CycleError("cycle has a strategic hold; resolve it before revision transitions")
+
+        if action in {"strategy-hold", "strategy-resume"}:
+            required = {"schema", "action", "reason", "evidence"}
+            if action == "strategy-hold":
+                required |= {"decision", "issue_id", "reopen_if"}
+            if set(event) != required:
+                raise CycleError("strategy event has unsupported fields")
+            if action == "strategy-resume" and (hold is None or state["pause"] is not None):
+                raise CycleError("strategy resume requires a recorded hold and no unresolved author pause")
+            record = {key: copy.deepcopy(value) for key, value in event.items() if key != "schema"}
+            record["recorded_at"] = utc_now()
+            history = state.get("strategy_history", []) + [record]
+            validate_strategy_history(history)
+            validate_evidence_snapshots(event["evidence"], root, "strategy event")
+            state["strategy_history"] = history
+            state["clean_reviews"] = []
+            return {"strategy_hold": current_strategy_hold(state), "issues_preserved": True}
 
         if action == "implemented":
             required = {"schema", "action", "issue_id", "worker_id", "locators"}
@@ -1237,6 +1321,10 @@ def record_review(root, review_path, write):
     def apply(ledger, state):
         if file_digest(review_file) != expected_review_sha256:
             raise CycleError("review artifact changed while it was being recorded")
+        if state["pause"] is not None:
+            raise CycleError("cycle is paused; a review cannot bypass the recorded author gate")
+        if current_strategy_hold(state) is not None:
+            raise CycleError("cycle has a strategic hold; a review cannot close or advance it")
         items, by_id = validate_cycle_issues(ledger, state)
         current = snapshot(root, state["contract"]["manuscript"]["path"])
         if current != state["manuscript"] or review["candidate_sha256"] != current["sha256"]:
